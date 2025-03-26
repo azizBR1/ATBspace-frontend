@@ -1,0 +1,112 @@
+<div class="auth-container">
+    <div class="auth-card">
+        <!-- Section QR Code -->
+        <div class="qr-section" *ngIf="qrData">
+            <h2 class="section-title">Authentification à Deux Facteurs</h2>
+            <div class="qr-wrapper">
+                <qrcode [qrdata]="qrData" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
+            </div>
+            <p class="instruction-text">Scannez ce QR code avec Google Authenticator, Authy ou toute autre application TOTP</p>
+        </div>
+        <div *ngIf="!qrData" class="error-banner">
+            <p>Aucune donnée QR code trouvée. Veuillez contacter le support.</p>
+        </div>
+
+        <!-- Section de saisie TOTP -->
+        <div class="totp-section">
+            <h3 class="input-title">Code de Vérification</h3>
+            <p class="instruction-text">Entrez le code à 6 chiffres de votre application d'authentification</p>
+            
+            <form [formGroup]="totpForm" (ngSubmit)="verifyTOTP()">
+                <div class="totp-input-container">
+                    <input
+                        #digitInput
+                        type="text"
+                        formControlName="digit1"
+                        maxlength="1"
+                        class="totp-input"
+                        autocomplete="off"
+                        inputmode="numeric"
+                        pattern="[0-9]"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        (input)="moveFocus(0, $event)"
+                    />
+                    <input
+                        #digitInput
+                        type="text"
+                        formControlName="digit2"
+                        maxlength="1"
+                        class="totp-input"
+                        autocomplete="off"
+                        inputmode="numeric"
+                        pattern="[0-9]"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        (input)="moveFocus(1, $event)"
+                    />
+                    <input
+                        #digitInput
+                        type="text"
+                        formControlName="digit3"
+                        maxlength="1"
+                        class="totp-input"
+                        autocomplete="off"
+                        inputmode="numeric"
+                        pattern="[0-9]"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        (input)="moveFocus(2, $event)"
+                    />
+                    <input
+                        #digitInput
+                        type="text"
+                        formControlName="digit4"
+                        maxlength="1"
+                        class="totp-input"
+                        autocomplete="off"
+                        inputmode="numeric"
+                        pattern="[0-9]"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        (input)="moveFocus(3, $event)"
+                    />
+                    <input
+                        #digitInput
+                        type="text"
+                        formControlName="digit5"
+                        maxlength="1"
+                        class="totp-input"
+                        autocomplete="off"
+                        inputmode="numeric"
+                        pattern="[0-9]"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        (input)="moveFocus(4, $event)"
+                    />
+                    <input
+                        #digitInput
+                        type="text"
+                        formControlName="digit6"
+                        maxlength="1"
+                        class="totp-input"
+                        autocomplete="off"
+                        inputmode="numeric"
+                        pattern="[0-9]"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        (input)="moveFocus(5, $event)"
+                    />
+                </div>
+
+                <!-- Ligne d'action -->
+                <div class="action-row">
+                    <button type="submit" [disabled]="totpForm.invalid" class="verify-button">
+                        Vérifier le Code
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Message de résultat de vérification -->
+            <div *ngIf="verificationResult" 
+                 [ngClass]="{'success-message': verificationSuccess, 'error-message': !verificationSuccess}"
+                 class="result-message">
+                {{ verificationResult }}
+            </div>
+        </div>
+    </div>
+</div>

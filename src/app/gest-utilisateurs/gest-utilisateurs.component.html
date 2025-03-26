@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+
+
+
+
+
+
+
+
+<style>
+
+    
+    body.sidebar-expanded {
+      padding-left: 260px; /* Pour compenser la sidebar étendue */
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      background: linear-gradient(to bottom, #000000, #450413);
+      width: 70px;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 1000;
+      transition: width 0.3s ease;
+      overflow: hidden;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    }
+    
+    .sidebar:hover {
+      width: 260px;
+    }
+    
+    .sidebar-header {
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .sidebar-logo {
+      width: 55px;
+      height: 55px;
+      margin-right: 15px;
+    }
+    
+    .sidebar-title {
+      white-space: nowrap;
+      line-height: 0.8;
+    }
+    
+    .admin-text {
+      font-size: 28px;
+      color: rgb(189, 189, 189);
+    }
+    
+    .space-text {
+      font-size: 20px;
+      color: white;
+    }
+    
+    .sidebar-menu {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    
+    .menu-item:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .menu-item i {
+      font-size: 20px;
+      min-width: 30px;
+      margin-left: 5px;
+
+    }
+    
+    .menu-item span {
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+    
+    .logout {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+    }
+    
+    /* Existing page styles */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 990;
+    }
+    
+    .container {
+      margin-top: 20px;
+    }
+    
+    .card {
+      border: none;
+      -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+      box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+      margin-bottom: 30px;
+      background: white;
+    }
+    
+    .w-60 {
+      width: 60px;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0 0 10px;
+      font-weight: 600;
+    }
+    
+    .social-links li a {
+      -webkit-border-radius: 50%;
+      background-color: rgba(89,206,181,.85);
+      border-radius: 50%;
+      color: #fff;
+      display: inline-block;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      width: 30px;
+      font-size: 12px;
+    }
+    
+    a {
+      color: #707070;
+    }
+    
+    .btn-toggle-sidebar {
+      position: fixed;
+      top: 10px;
+      left: 80px;
+      z-index: 1001;
+      background-color: #860624;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: left 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    
+    .btn-toggle-sidebar.expanded {
+      left: 270px;
+    }
+
+
+    @media (max-width: 768px) {
+      .mobile-toggle-btn {
+        display: none;
+    }
+    
+    .sidebar {
+      width: 0; /* Hide sidebar on mobile by default */
+    }
+    
+    .sidebar.expanded {
+      width: 260px; /* Full width when expanded */
+    }
+    
+    body {
+      padding-left: 0; /* Remove padding when sidebar is hidden */
+    }
+    
+    body.sidebar-expanded {
+      padding-left: 260px; /* Add padding when sidebar is expanded */
+    }
+  }
+
+  /* Remplacez cette partie dans votre CSS */
+.mobile-toggle-btn {
+  position: fixed;
+  z-index: 500;
+  top: 400px;
+  left: 10px;
+  background-color: #860624;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  font-size: 22px;
+  transition: left 0.3s ease;
+}
+
+
+
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+      <a href="http://localhost:4200/#/admin-dashboard" >
+        <img src="assets/logo atb.png"alt="Logo" class="sidebar-logo">
+      </a>
+      <h3 class="sidebar-title">
+        <b>
+          <span class="admin-text">Admin</span><br>
+          <span class="space-text">Space</span>
+        </b>
+      </h3>
+    </div>
+    <nav class="sidebar-menu">
+      <a href="http://localhost:4200/#/admin-dashboard" class="menu-item">
+        <i class="bi bi-speedometer2"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="http://localhost:4200/#/gest-utilisateurs" class="menu-item">
+        <i class="bi bi-people"></i>
+        <span>Gérer les comptes</span>
+      </a>
+      <a href="parametres.html"  class="menu-item">
+        <i class="bi bi-calendar-event"></i>
+          <span>Gérer les rendez-vous</span>
+      </a>
+      <a href="dashboard.html" class="menu-item">
+        <i class="bi bi-sort-numeric-up"></i>
+      <span>File D'attente</span>
+    </a>
+    <a href="parametres.html"  class="menu-item">
+        <i class="bi bi-credit-card-2-back"></i>
+      <span>Demande Carte Bancaire</span>
+    </a>
+      <a href="parametres.html"  class="menu-item">
+        <i class="bi bi-exclamation-octagon"></i>
+        <span>Gérer les Réclamation</span>
+      </a>
+      <a href="http://localhost:4200/#/" class="menu-item logout">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Déconnexion</span>
+      </a>
+    </nav>
+  </div>
+  <button id="mobileSidebarToggle"  class="mobile-toggle-btn" (click)="toggleSidebar()">
+    <i class="bi bi-arrow-bar-right"></i>
+  </button>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #1a1a1a, #292929); box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" (click)="onOpenModaladd('add')" style="cursor: pointer; transition: all 0.3s ease;">
+                      <i class="bi bi-person-add"></i> Ajouter un utilisateur
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-transparent border-right-0" style="border-color: #5e0000;">
+                          <i class="bi bi-search"></i>
+                        </span>
+                    </div>
+                    <input 
+                        name="searchName" 
+                        type="search" 
+                        (ngModelChange)="searchUtilisateurs(key.value)" 
+                        #key="ngModel" 
+                        ngModel 
+                        id="searchName" 
+                        class="form-control bg-transparent text-light border-left-0" 
+                        style="border-color: #6c757d;" 
+                        placeholder="Rechercher des utilisateurs..." 
+                        required
+                    >
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container" id="main-container">
+    <div class="row">
+        <div *ngFor="let utilisateur of utilisateurs" class="col-md-6 col-xl-3" >
+            <div class="card m-b-30" id="utilisateur" style="color: #fff;">
+                <div class="card-body row">
+                    <div class="col-6">
+                        <a href=""><img src="/assets/icon-user.png" alt="" class="img-fluid rounded-circle w-60"></a>
+                    </div>
+                    <div class="col-6 card-title align-self-center mb-0">
+                        <h5>{{utilisateur?.username}}</h5>
+                        <p class="m-0">{{utilisateur?.role}}</p>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush" >
+                    <li class="list-group-item" style="background-color: #2d2d2d;"><i class="fa fa-envelope float-right"></i>Email : <a href="https://workspace.google.com/intl/fr_ca/gmail/" target="_blank" rel="noopener noreferrer" style="color:#fff;">{{utilisateur?.email}}</a></li>
+                    <li class="list-group-item" style="background-color: #2d2d2d;"><i class="bi bi-person-gear float-right"></i>Statut : {{utilisateur?.status}}</li>
+                </ul>
+                <div class="card-body">
+                    <div class="float-right btn-group btn-group-sm">
+                        <a (click)="onOpenModal(utilisateur, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit" style="background-color: #006aff;" ><i class="fa fa-pencil"></i> </a>
+                        <a (click)="onOpenModal(utilisateur, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete" style="background-color: #8e0000;color:#fff"><i class="fa fa-times"></i></a>
+                    </div>
+                    <ul class="social-links list-inline mb-0">
+                        
+                        <li class="list-inline-item">
+                            <a (click)="onShowDetails(utilisateur)" class="tooltips">
+                                <i class="bi bi-file-earmark"></i>
+                                
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Utilisateur Modal -->
+<div class="modal fade" id="addUtilisateurModal" tabindex="-1" role="dialog" aria-labelledby="addUtilisateurModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" style="background-color: #2d2d2d; color: #e0e0e0; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+          <div class="modal-header" style="border-bottom: 1px solid #3d3d3d; padding: 20px;">
+              <h5 class="modal-title" id="addUtilisateurModalLabel" style="font-weight: 600; color: #ffffff;">
+                <i class="bi bi-person-add"></i><span></span> Ajouter un utilisateur
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #ffffff; opacity: 0.8; text-shadow: none;">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body" style="padding: 20px;">
+              <form #addForm="ngForm" (ngSubmit)="onAddUtilisateur(addForm)">
+                  <input type="hidden" ngModel name="id" class="form-control" id="id">
+                  
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label for="nom" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Nom</label>
+                          <input type="text" ngModel name="nom" class="form-control" id="nom" placeholder="Entrez le nom" 
+                                 style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px;">
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="prenom" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Prénom</label>
+                          <input type="text" ngModel name="prenom" class="form-control" id="prenom" placeholder="Entrez le prénom" 
+                                 style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px;">
+                      </div>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="username" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Nom d'utilisateur</label>
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text" style="background-color: #4d4d4d; border: 1px solid #4d4d4d; color: #cccccc;">
+                                <i class="bi bi-person"></i>
+                              </span>
+                          </div>
+                          <input type="text" ngModel name="username" class="form-control" id="username" placeholder="Entrez le nom d'utilisateur" 
+                                 style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;">
+                      </div>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="mdp" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Mot de passe</label>
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text" style="background-color: #4d4d4d; border: 1px solid #4d4d4d; color: #cccccc;">
+                                <i class="bi bi-safe"></i>
+                              </span>
+                          </div>
+                          <input type="password" ngModel name="mdp" class="form-control" id="mdp" placeholder="Entrez le mot de passe" 
+                                 style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;">
+                      </div>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="email" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Adresse email</label>
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text" style="background-color: #4d4d4d; border: 1px solid #4d4d4d; color: #cccccc;">
+                                <i class="bi bi-mailbox"></i>
+                              </span>
+                          </div>
+                          <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Entrez l'adresse email" 
+                                 style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;">
+                      </div>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="telephone" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Téléphone</label>
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text" style="background-color: #4d4d4d; border: 1px solid #4d4d4d; color: #cccccc;">
+                                <i class="bi bi-phone"></i>
+                              </span>
+                          </div>
+                          <input type="text" ngModel name="telephone" class="form-control" id="telephone" placeholder="Entrez le numéro de téléphone" 
+                                 style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;">
+                      </div>
+                  </div>
+                  
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label for="role" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Rôle</label>
+                          <select id="role" name="role" ngModel required class="form-control" 
+                                  style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px; height: 45px;">
+                              <option value="" disabled selected>Sélectionnez un rôle</option>
+                              <option value="CLIENT">CLIENT</option>
+                              <option value="EMPLOYEE">EMPLOYEE</option>
+                          </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="status" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Statut</label>
+                          <select id="status" name="status" ngModel required class="form-control" 
+                                  style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px; height: 45px;">
+                              <option value="" disabled selected>Sélectionnez un statut</option>
+                              <option value="ACTIF">ACTIF</option>
+                              <option value="SUSPENDUE">SUSPENDUE</option>
+                              <option value="EN ATTENTE">EN ATTENTE</option>
+                          </select>
+                      </div>
+                  </div>
+                  
+                  <div class="modal-footer" style="border-top: 1px solid #3d3d3d; padding: 15px 0 0 0; margin-top: 10px;">
+                      <button type="button" class="btn" data-dismiss="modal" 
+                              style="background-color: #4d4d4d; color: #ffffff; border-radius: 5px; padding: 8px 15px; transition: all 0.3s;">
+                              <i class="bi bi-x-circle"></i>&nbsp;Annuler
+                      </button>
+                      <button [disabled]="addForm.invalid" type="submit" class="btn" 
+                              style="background-color: #007bff; color: #ffffff; border-radius: 5px; padding: 8px 15px; transition: all 0.3s;">
+                              <i class="bi bi-plus-circle"></i>&nbsp;Enregistrer
+
+                      </button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Edit Utilisateur Modal -->
+<div class="modal fade" id="updateUtilisateurModal" tabindex="-1" role="dialog" aria-labelledby="utilisateurEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document"  >
+        <div class="modal-content" style="background-color: #2d2d2d; color: #e0e0e0; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);" >
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateUtilisateurModalLabel">Edit Utilisateur {{editUtilisateur.nom}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #editForm="ngForm" >
+                   <div class="form-group" >
+                    <label for="username" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #4d4d4d; border: 1px solid #4d4d4d; color: #cccccc;">
+                              <i class="bi bi-person"></i>
+                            </span>
+                        </div>
+                        <input type="text" ngModel="{{editUtilisateur.username}}" name="username" class="form-control" id="username" placeholder="username" 
+                              style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Adresse mail</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #4d4d4d; border: 1px solid #4d4d4d; color: #cccccc;">
+                              <i class="bi bi-mailbox"></i>
+                             
+                            </span>
+                        </div>
+                        <input type="email" ngModel="{{editUtilisateur.email}}" name="email" class="form-control" id="email" placeholder="Email" 
+                              style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="role" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Role</label>
+                        <select ngModel="{{editUtilisateur.role}}" name="role" class="form-control" id="role" 
+                               style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px; height: 45px;">
+                            <option value="CLIENT">CLIENT</option>
+                            <option value="EMPLOYEE">EMPLOYEE</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="status" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Status</label>
+                        <select ngModel="{{editUtilisateur.status}}" name="status" class="form-control" id="status" 
+                               style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px; height: 45px;">
+                            <option value="ACTIF">ACTIF</option>
+                            <option value="SUSPENDUE">SUSPENDUE</option>
+                            <option value="EN ATTENTE">EN ATTENTE</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="modal-footer" style="border-top: 1px solid #3d3d3d; padding: 15px 0 0 0; margin-top: 10px;">
+                    <button type="button" class="btn" data-dismiss="modal" 
+                           style="background-color: #4d4d4d; color: #ffffff; border-radius: 5px; padding: 8px 15px; transition: all 0.3s;">
+                           <i class="bi bi-x-circle"></i>&nbsp;Annuler
+                          
+                    </button>
+                    <button (click)="onUpdateUtilisateur(editForm.value)" data-dismiss="modal" class="btn" 
+                           style="background-color: #007bff; color: #ffffff; border-radius: 5px; padding: 8px 15px; transition: all 0.3s;">
+                           <i class="bi bi-plus-circle"></i>&nbsp;Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Delete Utilisateur Modal -->
+<div class="modal fade" id="deleteUtilisateurModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: #2d2d2d; color: #e0e0e0; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModelLabel">Delete Utilisateur</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete utilisateur {{deleteUtilisateur.nom}}?</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button (click)="onDeleteUtilisateur(deleteUtilisateur.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Notification for no utilisateurs -->
+<div *ngIf="utilisateurs.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">PAS UTILISATEURS!</h4>
+        <p>No utilisateurs were found.</p>
+    </div>
+</div>
+
+
+
+<div *ngIf="selectedUtilisateur" class="modal fade show" tabindex="-1" role="dialog" style="display: block; background: rgba(0, 0, 0, 0.5);">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="background-color: #2d2d2d; color: #e0e0e0; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+        <div class="modal-header">
+          <h5 class="modal-title">Détails de l'utilisateur</h5>
+          <button type="button" class="close" (click)="selectedUtilisateur = null">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Username :</strong> {{selectedUtilisateur.username}}</p>
+          <p><strong>Nom :</strong> {{selectedUtilisateur.nom}}</p>
+          <p><strong>Prénom :</strong> {{selectedUtilisateur.prenom}}</p>
+          <p><strong>Email :</strong> {{selectedUtilisateur.email}}</p>
+          <p><strong>Téléphone :</strong> {{selectedUtilisateur.telephone}}</p>
+          <p><strong>Statut :</strong> {{selectedUtilisateur.status}}</p>
+          <p><strong>Rôle :</strong> {{selectedUtilisateur.role}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="selectedUtilisateur = null">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>

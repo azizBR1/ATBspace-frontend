@@ -1,0 +1,18 @@
+<div *ngIf="reclamations.length > 0; else noReclamations">
+    <h2>List of Reclamations</h2>
+    <ul>
+      <li *ngFor="let reclamation of reclamations">
+        <p><strong>Description:</strong> {{ reclamation.description }}</p>
+        <p><strong>Type:</strong> {{ reclamation.type }}</p>
+        <p><strong>Status:</strong> {{ reclamation.statut }}</p>
+        <p *ngIf="reclamation.pieceJointe">
+            <button (click)="downloadFile(reclamation)">View Attached File</button>
+        </p>
+        <hr>
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noReclamations>
+    <p>No reclamations found.</p>
+  </ng-template>

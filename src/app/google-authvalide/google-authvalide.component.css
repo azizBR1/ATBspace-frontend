@@ -1,0 +1,138 @@
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0c0c0c;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.auth-card {
+    background-color: #212121;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    gap: 2rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+}
+
+.qr-section,
+.totp-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+}
+
+.qr-wrapper {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.instruction-text,
+.input-title {
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.input-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.instruction-text {
+    font-size: 0.9rem;
+}
+
+.totp-input-container {
+    margin: 1rem 0;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center; /* Center the input fields horizontally */
+}
+
+.totp-input {
+    font-size: 1.5rem;
+    width: 2.5rem;
+    text-align: center;
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+    padding: 0.75rem 0;
+}
+
+.totp-input:focus {
+    outline: none;
+    border-color: #4285f4;
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+.action-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.verify-button {
+    padding: 0.75rem 2rem;
+    background-color: #1aab00;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    width: 100%;
+    max-width: 200px; /* Limit button width */
+}
+
+.verify-button:hover {
+    background-color: #01d704;
+}
+
+.verify-button:disabled {
+    background-color: #3e5e37;
+    cursor: not-allowed;
+}
+
+.result-message {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.success-message {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid #2e7d32;
+}
+
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #c62828;
+}

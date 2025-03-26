@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        .background-img {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .container {
+            background: rgb(19, 0, 0);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container img {
+            width: 120px;
+            margin-bottom: 15px;
+        }
+        h3 {
+            color: #bfbfbf;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            text-align: left;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: #740000;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            display: block;
+        }
+        .form-group input:focus {
+            border-color: #7b1c1c;
+            outline: none;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            width: 110%;
+        }
+        .btn {
+            background-color: #7b1c1c;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #5a1414;
+        }
+    </style>
+</head>
+<body>
+    <img src="assets/backgr-login.png" alt="Background" class="background-img">
+    <div class="container">
+        <img src="assets/logo atb.png" alt="Logo">
+        <h3>Connectez-vous</h3>
+        <form action="login" method="post">
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur</label>
+                <input [(ngModel)]="logs.username" name="username"  type="text" id="username" name="username" placeholder="Nom d'utilisateur">
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input [(ngModel)]="logs.mdp" name="mdp" type="password" id="password" name="password" placeholder="Mot de passe">
+            </div >
+            <div class="btn-container">
+            <button type="submit" class="btn" (click)="onLogin()">Se connecter</button>
+        </div>
+        </form>
+    </div>
+</body>
+</html>

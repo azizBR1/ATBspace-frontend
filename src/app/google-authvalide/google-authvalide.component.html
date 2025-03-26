@@ -1,0 +1,52 @@
+<head>
+    <link rel="stylesheet" href="google-authvalide.component.css">
+</head>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="totp-section">
+            <!-- En-tête TOTP -->
+            <div class="totp-header">
+                <h3 class="input-title">Code de Vérification</h3>
+                <p class="instruction-text">Entrez le code à 6 chiffres de votre application d'authentification</p>
+            </div>
+
+            <!-- Formulaire TOTP -->
+            <div class="totp-form">
+                <form [formGroup]="totpForm" (ngSubmit)="verifyTOTP()">
+                    <!-- Conteneur des champs de saisie TOTP -->
+                    <div class="totp-input-container">
+                        <!-- Génération dynamique des champs de saisie pour une meilleure maintenabilité -->
+                        <ng-container *ngFor="let digit of [1, 2, 3, 4, 5, 6]; let i = index">
+                            <input
+                                #digitInput
+                                type="text"
+                                [formControlName]="'digit' + digit"
+                                maxlength="1"
+                                class="totp-input"
+                                autocomplete="off"
+                                inputmode="numeric"
+                                pattern="[0-9]"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                (input)="moveFocus(i, $event)"
+                            />
+                        </ng-container>
+                    </div>
+
+                    <!-- Ligne d'action -->
+                    <div class="action-row">
+                        <button type="submit" [disabled]="totpForm.invalid" class="verify-button">
+                            Vérifier le Code
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Message de résultat de vérification -->
+            <div *ngIf="verificationResult" 
+                 [ngClass]="{'success-message': verificationSuccess, 'error-message': !verificationSuccess}" 
+                 class="result-message">
+                {{ verificationResult }}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="currency-list">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Unité</th>
+          <th>Taux Achat</th>
+          <th>Taux Vente</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let currency of currencies">
+          <td>{{ currency.code }}</td>
+          <td>{{ currency.unite }}</td>
+          <td>{{ currency.txa }}</td>
+          <td>{{ currency.txv }}</td>
+          <td>{{ currency.date | date: 'dd/MM/yyyy HH:mm' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
