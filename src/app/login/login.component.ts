@@ -3,20 +3,48 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet, Router } from '@angular/router';
 import { UtilisateurService } from '../utilisateur/utilisateur.service';
+import { FileService } from '../file-utilisateur/file.service';
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, RouterOutlet,FormsModule,HttpClientModule],
+  imports: [RouterLink, RouterOutlet,FormsModule,HttpClientModule,CommonModule],
   providers: [UtilisateurService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-  constructor(private router: Router) { }
+  public isUsernameModalOpen = false;
+  public isUsernameModalOpen2 = false;
+  public email: string = '';
+  public emailExist: boolean = true;
+
+  constructor(private utilisateurService: UtilisateurService,
+              private fileService: FileService,private router: Router
+  ){}
+
+  
+
+ openUsernameModal() {
+  this.isUsernameModalOpen = true;
+}
+
+closeUsernameModal() {
+  this.isUsernameModalOpen = false;
+}
+
+
+ openUsernameModal2() {
+  this.isUsernameModalOpen2 = true;
+}
+
+closeUsernameModal2() {
+  this.isUsernameModalOpen2 = false;
+}
 
   logs: any = {
     "username": "",
@@ -26,6 +54,7 @@ export class LoginComponent {
   http=inject(HttpClient)
 
   onLogin() {
+   
     this.http.post('http://localhost:8090/login', this.logs, { responseType: 'text' }).subscribe(
       (response: any) => {
         if (response) {
@@ -45,7 +74,7 @@ export class LoginComponent {
             localStorage.setItem('totp', totp);
 
            
-            
+           
             
 
 
@@ -54,6 +83,7 @@ export class LoginComponent {
             this.redirectUser(role ,status,totp);
           } 
         }
+       
       },
       (error: any) => {
         alert("Votre nom d'utilisateur ou mot de passe est incorrect");
@@ -63,9 +93,12 @@ export class LoginComponent {
 
 
 }
+
 redirectUser(role: string, status: string, totp: string) {
   if (role === 'ADMIN') {
-    this.router.navigate(['/admin-dashboard']);
+      sessionStorage.setItem('from', 'true');
+      this.router.navigate(['/admin-dashboard']);
+
   } else if (role === 'CLIENT') {
     if (status === 'ACTIF') {
       if (totp === "false") {
@@ -83,5 +116,52 @@ redirectUser(role: string, status: string, totp: string) {
   }
 }
 
+
+submitemail() {
+  this.utilisateurService.resetUsername(this.email).subscribe(
+        (response) => {
+          if (response) {
+          this.emailExist = true;
+          alert("Un mail a été envoyé à votre adresse e-mail.");
+          this.closeUsernameModal();
+          }
+          else{
+            this.emailExist = true;
+          }
+        },
+        (error) => {
+          this.emailExist = false;
+          console.error('Username??:', error);
+
+        }
+      );
+
+
+
+}
+
+
+submitemailMDP() {
+  this.utilisateurService.resetPasswordchange(this.email).subscribe(
+        (response) => {
+          if (response) {
+          this.emailExist = true;
+          alert("Un mail de réinitialisation a été envoyé à votre adresse e-mail.");
+          this.closeUsernameModal();
+          }
+          else{
+            this.emailExist = true;
+          }
+        },
+        (error) => {
+          this.emailExist = false;
+          console.error('MDP??:', error);
+
+        }
+      );
+
+
+
+}
 
 }

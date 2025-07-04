@@ -35,7 +35,9 @@ export class GoogleAuthComponent implements OnInit {
   }
 
 
-
+ saveReferrer() {
+  sessionStorage.setItem('from', 'true');
+}
 
 
   verifyTOTP() {

@@ -33,7 +33,7 @@
           }
           
           .sidebar:hover {
-            width: 260px;
+            width: 280px;
           }
           
           .sidebar-header {
@@ -103,7 +103,7 @@
             width: 100%;
           }
           
-          /* Existing page styles */
+        
           .navbar {
             position: sticky;
             top: 0;
@@ -182,7 +182,7 @@
           }
           
           .sidebar.expanded {
-            width: 260px; /* Full width when expanded */
+            width: 260px; 
           }
           
           body {
@@ -194,7 +194,7 @@
           }
         }
       
-        /* Remplacez cette partie dans votre CSS */
+ 
       .mobile-toggle-btn {
         position: fixed;
         top: 400px;
@@ -235,15 +235,15 @@
             </h3>
           </div>
           <nav class="sidebar-menu">
-            <a href="dashboard.html" class="menu-item">
+            <a href="http://localhost:4200/#/file-utilisateur" class="menu-item">
                 <i class="bi bi-sort-numeric-up"></i>
               <span>File D'attente</span>
             </a>
-            <a href="dashboard.html" class="menu-item">
+            <a href="http://localhost:4200/#/credit-utilisateur" class="menu-item">
                 <i class="bi bi-file-earmark-text"></i>
-              <span>Documents Crédit Bancaire</span>
+              <span>Crédit Bancaire</span>
             </a>
-            <a href="parametres.html"  class="menu-item">
+            <a href="http://localhost:4200/#/Carte-utilisateur"  class="menu-item">
                 <i class="bi bi-credit-card-2-back"></i>
               <span>Demande Carte Bancaire</span>
             </a>
@@ -256,8 +256,12 @@
                 <i class="bi bi-exclamation-octagon"></i>
               <span>Réclamation</span>
             </a>
+             <a href="http://localhost:4200/#/parametre-utilisateur"  class="menu-item">
+                <i class="bi bi-gear"></i>
+              <span>Parametres</span>
+            </a>
 
-            <a href="http://localhost:4200/#/" class="menu-item logout">
+            <a href="http://localhost:4200/#/" class="menu-item logout"> 
               <i class="bi bi-box-arrow-right"></i>
               <span>Déconnexion</span>
             </a>
@@ -267,14 +271,25 @@
           <i class="bi bi-arrow-bar-right"></i>
         </button>
       
+
+        <div class="video-background">
+  <video autoplay muted loop playsinline>
+    <source src="assets/bg-utili.mp4" type="video/mp4" />
+    Votre navigateur ne supporte pas la vidéo HTML5.
+  </video>
         <div class="container">
           <div class="row">
             <div class="col-md-12">
-              <h1>Dashboard</h1>
-              <p>Welcome to the dashboard</p>
+              <h1>Bienvenue cher(e)s</h1>
+              <h2 style="text-transform: uppercase;">{{username}}</h2>
             </div>
           </div>
-    
+
+          <div class="message-container">
+  <span class="icon">{{ icon }}</span>
+  <span class="text">{{ phrase }}</span>
+</div>
+  </div>  
    
     
 

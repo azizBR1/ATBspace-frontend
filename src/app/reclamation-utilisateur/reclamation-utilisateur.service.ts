@@ -27,7 +27,12 @@ export class ReclamationUtilisateurService {
     return this.http.get<Reclamation[]>(`${this.apiServerUrl}/reclamations/all`, { headers });
   }
 
-  // Ajouter une réclamation
+  public getReclamationsByUserId(username: string): Observable<Reclamation[]> {
+    const headers = this.getHeaders();
+    return this.http.get<Reclamation[]>(`${this.apiServerUrl}/reclamations/${username}`, { headers });
+  }
+  
+ 
   public addReclamation(description: string, type: string, username: string, file?: File): Observable<Reclamation> {
     const formData: FormData = new FormData();
     formData.append('description', description);
@@ -48,7 +53,7 @@ export class ReclamationUtilisateurService {
     return this.http.delete<void>(`${this.apiServerUrl}/reclamations/${id}`, { headers });
   }
 
-  // Mettre à jour une réclamation
+
   public updateReclamation(reclamation: Reclamation): Observable<Reclamation> {
     const headers = this.getHeaders();
     return this.http.put<Reclamation>(`${this.apiServerUrl}/reclamations`, reclamation, { headers });

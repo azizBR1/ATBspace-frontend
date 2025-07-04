@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
@@ -10,8 +10,30 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   templateUrl: './espace-utilisateur.component.html',
   styleUrl: './espace-utilisateur.component.css'
 })
-export class EspaceUtilisateurComponent {
+export class EspaceUtilisateurComponent implements OnInit {
+  
+  phrases: string[] = [
+    "Savez-vous que l’ATB est l’une des banques les plus innovantes du pays ?",
+    "Saviez-vous que l’ATB propose des solutions de paiement sécurisées et modernes ?",
+    "Savez-vous que vous pouvez demander votre carte ATB en ligne, sans vous déplacer ?",
+    "Saviez-vous que l’ATB vous accompagne aussi bien en Tunisie qu’à l’étranger ?",
+    "Saviez-vous que l’ATB propose une large gamme de cartes bancaires adaptées à vos besoins ?",
+    "Connaissez-vous les services en ligne que l’ATB met à votre disposition 24h/24 ?"
+  ];
+
+  icons: string[] = ['💡', '🔒', '💳', '🌍', '📦', '📱'];
+  phrase: string = '';
+  icon: string = '';
   isSidebarExpanded = false;
+  username: string | null = '';
+
+
+  ngOnInit(): void {
+    this.username = localStorage.getItem('username');
+    const randomIndex = Math.floor(Math.random() * 6);
+    this.phrase = this.phrases[randomIndex];
+    this.icon = this.icons[randomIndex];
+  }
         
   toggleSidebar() {
     this.isSidebarExpanded = !this.isSidebarExpanded;

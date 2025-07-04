@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+</head>
+<body>
+
+  <div class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+      <a href="http://localhost:4200/#/admin-dashboard" (click)="saveReferrer()">
+      <img src="assets/logo atb.png"alt="Logo" class="sidebar-logo">
+    </a>
+      <h3 class="sidebar-title">
+        <b>
+          <span class="admin-text">Admin</span><br>
+          <span class="space-text">Space</span>
+        </b>
+      </h3>
+    </div>
+    <nav class="sidebar-menu">
+      <a href="http://localhost:4200/#/admin-dashboard" class="menu-item"   (click)="saveReferrer()">
+        <i class="bi bi-speedometer2"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="http://localhost:4200/#/gest-utilisateurs" class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-people"></i>
+        <span>Gérer les comptes</span>
+      </a>
+      <a href="http://localhost:4200/#/credit-admin"  class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-calendar-event"></i>
+          <span>Gérer les rendez-vous</span>
+      </a>
+      <a href="http://localhost:4200/#/file-admin" class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-sort-numeric-up"></i>
+      <span>File D'attente</span>
+    </a>
+     <a href="http://localhost:4200/#/Carte-admin" class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-credit-card-2-back"></i>
+      <span>Demande Carte Bancaire</span>
+    </a>
+    <a href="http://localhost:4200/#/currency-administrateur" (click)="saveReferrer()"  class="menu-item" class="menu-item active">
+      <i class="bi bi-currency-exchange"></i>
+      <span>Cours de Change</span>
+    </a>
+      <a href="http://localhost:4200/#/reclamation-admin" (click)="saveReferrer()"  class="menu-item">
+        <i class="bi bi-exclamation-octagon"></i>
+        <span>Gérer les Réclamations</span>
+      </a>
+      <a href="http://localhost:4200/#/" class="menu-item logout">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Déconnexion</span>
+      </a>
+    </nav>
+  </div>
+  <button id="mobileSidebarToggle"  class="mobile-toggle-btn" (click)="toggleSidebar()">
+    <i class="bi bi-arrow-bar-right"></i>
+  </button>
+
+
+
+
+
+      <div class="content-wrapper">
+        <div class="currency-container">
+      
+          <div *ngIf="successMessage" class="alert alert-success">
+            {{ successMessage }}
+          </div>
+          
+          <div class="currency-header">
+            <div class="currency-title">
+              <h2 class="digital-title">Taux de change</h2>
+            </div>
+            <button class="add-currency-btn" (click)="onOpenModaladd('add')">
+              <i class="bi bi-plus-circle"></i> Ajouter
+            </button>
+          </div>
+          
+          
+              <table class="digital-currency-table">
+                <thead>
+                  <tr>
+                    <th class="flag-cell"><i class="bi bi-globe-europe-africa"></i></th>
+                    <th>Code</th>
+                    <th>Unité</th>
+                    <th>Taux d'achat</th>
+                    <th>Taux de vente</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let currency of currencies">
+                    <td class="flag-cell">
+                      <div class="currency-flag">{{ currency.code.substring(0, 1) }}</div>
+                    </td>
+                    <td class="digital-display-code">{{ currency.code }}</td>
+                    <td class="digital-display-unit">{{ currency.unite }}</td>
+                    <td class="digital-display-rate">{{ currency.txa | number:'1.3-3' }}</td>
+                    <td class="digital-display-rate">{{ currency.txv | number:'1.3-3' }}</td>
+                    <td class="digital-display-date">{{ currency.date | date: 'dd/MM/yyyy HH:mm' }}</td>
+                    <td class="action-cell">
+                      <button class="btn-edit" (click)="onOpenModaledit(currency)">
+                        <i class="bi bi-pencil-fill"></i>
+                      </button>
+                      <button class="btn-delete" (click)="openDeleteModal(currency)">
+                        <i class="bi bi-trash-fill"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <!-- Empty state -->
+              <div *ngIf="currencies.length === 0" class="text-center my-4">
+                <p>Aucune devise trouvée. Ajoutez votre première devise.</p>
+              </div>
+            </div>
+          </div>
+   
+ 
+      
+      
+      
+      <!-- Delete Currency Modal -->
+      <div class="modal-backdrop" [class.show]="showDeleteModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Supprimer la devise</h5>
+            <button class="modal-close" (click)="closeModals()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+            
+            <div class="delete-message">
+              Êtes-vous sûr de vouloir supprimer la devise <span class="delete-currency">{{ selectedCurrency?.code }}</span> ?<br>
+              Cette action est irréversible.
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-cancel" (click)="closeModals()">Annuler</button>
+            <button class="btn btn-confirm"  (click)="deleteCurrency()">
+              
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div *ngIf="showAddModal" class="modal fade show" id="addCurrencyModal" tabindex="-1" role="dialog" aria-labelledby="addCurrencyLabel" aria-hidden="true" style="display:block;">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content" style="background-color: #2d2d2d; color: #e0e0e0; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+            <div class="modal-header" style="border-bottom: 1px solid #3d3d3d; padding: 20px;">
+              <h5 class="modal-title" id="addUtilisateurModalLabel" style="font-weight: 600; color: #ffffff;">
+                <span></span> Ajouter
+              </h5>
+              <button type="button" class="close" (click)="closeModals()" aria-label="Close" style="color: #ffffff; opacity: 0.8; text-shadow: none;">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="padding: 20px;">
+              <form #addForm="ngForm">
+                <input type="hidden" ngModel name="id" class="form-control" id="id">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="code" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Code</label>
+                    <input type="text" ngModel name="code" class="form-control" id="code" placeholder="Entrez le code" 
+                           style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px;" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="unite" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Unité</label>
+                    <input type="text" ngModel name="unite" class="form-control" id="unite" placeholder="Entrez l'unité" 
+                           style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px;" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="txa" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Taux d'achat</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" style="background-color: #4d4d4d; border: 1px solid #4d4d4d; color: #cccccc;">
+                        <i class="bi bi-arrow-right"></i>
+                      </span>
+                    </div>
+                    <input type="number" ngModel name="txa" class="form-control" id="txa" placeholder="Entrez le txa" 
+                           style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="txv" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Taux de vente</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" style="background-color: #4d4d4d; border: 1px solid #4d4d4d; color: #cccccc;">
+                        <i class="bi bi-arrow-left"></i>
+                      </span>
+                    </div>
+                    <input type="number" ngModel name="txv" class="form-control" id="txv" placeholder="Entrez le txv" 
+                           style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;" required>
+                  </div>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid #3d3d3d; padding: 15px 0 0 0; margin-top: 10px;">
+                  <button type="button" class="btn" (click)="closeModals()" 
+                          style="background-color: #d50000; color: #ffffff; border-radius: 5px; padding: 8px 15px; transition: all 0.3s;">
+                    <i class="bi bi-x-circle"></i>&nbsp;Annuler
+                  </button>
+                  <button type="button" class="btn" (click)="onAddCurrency(addForm)"[disabled]="!addForm.valid"
+                  [ngClass]="{'btnadd-disabled': !addForm.valid, 'btnadd-enabled': addForm.valid}"
+                          >
+                    <i class="bi bi-plus-circle"></i>&nbsp;Enregistrer
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Modale d'édition de devise -->
+<div *ngIf="showEditModal" class="modal fade show" id="editCurrencyModal" tabindex="-1" role="dialog" aria-labelledby="editCurrencyLabel" aria-hidden="true" style="display:block;">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="background-color: #2d2d2d; color: #e0e0e0; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+      <div class="modal-header" style="border-bottom: 1px solid #3d3d3d; padding: 20px;">
+        <h5 class="modal-title" id="editCurrencyModalLabel" style="font-weight: 600; color: #ffffff;">
+          Modifier
+        </h5>
+        <button type="button" class="close" (click)="closeModals()" aria-label="Close" style="color: #ffffff; opacity: 0.8; text-shadow: none;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 20px;">
+        <form #editForm="ngForm">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="code" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Code</label>
+                    <input type="text" ngModel name="code" class="form-control" id="code" placeholder="Entrez le code" 
+                           style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px;" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="unite" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Unité</label>
+                    <input type="text" ngModel name="unite" class="form-control" id="unite" placeholder="Entrez l'unité" 
+                           style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px;" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="txa" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Taux d'achat</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" style="background-color: #4d4d4d; border: 1px solid #4d4d4d; color: #cccccc;">
+                        <i class="bi bi-arrow-right"></i>
+                      </span>
+                    </div>
+                    <input type="number" ngModel name="txa" class="form-control" id="txa" placeholder="Entrez le txa" 
+                           style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="txv" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Taux de vente</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" style="background-color: #4d4d4d; border: 1px solid #4d4d4d; color: #cccccc;">
+                        <i class="bi bi-arrow-left"></i>
+                      </span>
+                    </div>
+                    <input type="number" ngModel name="txv" class="form-control" id="txv" placeholder="Entrez le txv" 
+                           style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;" required>
+                  </div>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid #3d3d3d; padding: 15px 0 0 0; margin-top: 10px;">
+                  <button type="button" class="btn" (click)="closeModals()" 
+                          style="background-color: #d50000; color: #ffffff; border-radius: 5px; padding: 8px 15px; transition: all 0.3s;">
+                    <i class="bi bi-x-circle"></i>&nbsp;Annuler
+                  </button>
+                  <button type="button" class="btn" (click)="onUpdateCurrency(editForm)"[disabled]="!editForm.valid"
+                  [ngClass]="{'btnadd-disabled': !editForm.valid, 'btnadd-enabled': editForm.valid}"
+                          >
+                    <i class="bi bi-plus-circle"></i>&nbsp;Enregistrer
+                  </button>
+                </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

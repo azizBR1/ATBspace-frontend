@@ -1,0 +1,126 @@
+
+<head>
+  <meta charset="UTF-8">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<body>
+  
+  
+  <div class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+      <a href="http://localhost:4200/#/admin-dashboard" (click)="saveReferrer()">
+      <img src="assets/logo atb.png"alt="Logo" class="sidebar-logo">
+    </a>
+      <h3 class="sidebar-title">
+        <b>
+          <span class="admin-text">Admin</span><br>
+          <span class="space-text">Space</span>
+        </b>
+      </h3>
+    </div>
+    <nav class="sidebar-menu">
+      <a href="http://localhost:4200/#/admin-dashboard" class="menu-item"  (click)="saveReferrer()">
+        <i class="bi bi-speedometer2"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="http://localhost:4200/#/gest-utilisateurs" class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-people"></i>
+        <span>Gérer les comptes</span>
+      </a>
+      <a href="http://localhost:4200/#/credit-admin"  class="menu-item" class="menu-item active" (click)="saveReferrer()">
+        <i class="bi bi-calendar-event"></i>
+          <span>Gérer les rendez-vous</span>
+      </a>
+      <a href="http://localhost:4200/#/file-admin" class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-sort-numeric-up"></i>
+      <span>File D'attente</span>
+    </a>
+    <a href="http://localhost:4200/#/Carte-admin" class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-credit-card-2-back"></i>
+      <span>Demande Carte Bancaire</span>
+    </a>
+    <a href="http://localhost:4200/#/currency-administrateur"  class="menu-item" (click)="saveReferrer()">
+      <i class="bi bi-currency-exchange"></i>
+      <span>Cours de Change</span>
+    </a>
+      <a href="http://localhost:4200/#/reclamation-admin"  class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-exclamation-octagon"></i>
+        <span>Gérer les Réclamations</span>
+      </a>
+      <a href="http://localhost:4200/#/" class="menu-item logout">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Déconnexion</span>
+      </a>
+    </nav>
+  </div>
+  <button id="mobileSidebarToggle"  class="mobile-toggle-btn" (click)="toggleSidebar()">
+    <i class="bi bi-arrow-bar-right"></i>
+  </button>
+
+ 
+<div *ngIf="credits.length === 0" class="videmsg">
+      <i class="bi bi-calendar-x"></i><br>
+      Pas de rdv demandé pour le moment
+      </div> 
+  <div *ngIf="credits.length > 0">
+  <div *ngFor="let credit of credits" class="credit">
+
+    <button (click)="deleteCredit(credit)" class="btnsupp">Supprimer</button>
+    <h5>Type: {{ credit.type }}</h5>
+    <p>Statut: {{ credit.statut }}</p>
+    <p>Code: {{ credit.code }}</p>
+    <p>Date: {{ credit.date }}</p>
+    <hr>
+    <button (click)="editCredit(credit)" class="btnmjr">Modifier</button>
+  </div>
+
+  </div>
+
+
+  <form #rdvForm="ngForm" id="rdvForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <input 
+      id="rdvDateTimePicker"
+      type="text"
+      class="form-control"
+      placeholder="Sélectionner la date et l'heure"
+      [(ngModel)]="Credit.date"
+      [ngModel]="null"  
+      name="date">
+        <div class="text-right mt-4">
+            <button type="submit"  class="btn btn-submit" id="btnblock1" >
+              <i class="bi bi-clock-history"></i> Bloquer un créneau
+            </button>
+          </div>
+    </div>
+
+    <div class="text-right mt-2">
+      <button type="button" class="btn btn-danger" (click)="blockFullDay()" id="btnblock2">
+        <i class="bi bi-calendar-x"></i> Bloquer toute la journée
+      </button>
+
+    </div>
+
+      </form>
+
+<form (ngSubmit)="onUpdate()" class="updtform" *ngIf="creditform">
+  
+  <label class="updtformlabel">Statut:</label>
+  <select [(ngModel)]="Credit.statut" name="statut" required>
+  <option value="" disabled selected>-- Sélectionnez un statut --</option>
+  <option value="En Attente">En Attente</option>
+  <option value="Traité">Traité</option>
+  <option value="Accepté">Accepté</option>
+  <option value="Refusé">Refusé</option>
+</select>
+  <button type="submit" class="mjrsubmitbutton">Mettre à jour</button>
+</form>
+
+
+</body>
+
+  

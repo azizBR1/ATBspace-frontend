@@ -1,18 +1,159 @@
-<div *ngIf="reclamations.length > 0; else noReclamations">
-    <h2>List of Reclamations</h2>
-    <ul>
-      <li *ngFor="let reclamation of reclamations">
-        <p><strong>Description:</strong> {{ reclamation.description }}</p>
-        <p><strong>Type:</strong> {{ reclamation.type }}</p>
-        <p><strong>Status:</strong> {{ reclamation.statut }}</p>
-        <p *ngIf="reclamation.pieceJointe">
-            <button (click)="downloadFile(reclamation)">View Attached File</button>
-        </p>
-        <hr>
-      </li>
-    </ul>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="sidebar" id="mySidebar">
+      <div class="sidebar-header">
+        <a href="http://localhost:4200/#/admin-dashboard" (click)="saveReferrer()">
+        <img src="assets/logo atb.png"alt="Logo" class="sidebar-logo">
+      </a>
+        <h3 class="sidebar-title">
+          <b>
+            <span class="admin-text">Admin</span><br>
+            <span class="space-text">Space</span>
+          </b>
+        </h3>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="http://localhost:4200/#/admin-dashboard" (click)="saveReferrer()" class="menu-item"  >
+          <i class="bi bi-speedometer2"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="http://localhost:4200/#/gest-utilisateurs"  (click)="saveReferrer()" class="menu-item">
+          <i class="bi bi-people"></i>
+          <span>Gérer les comptes</span>
+        </a>
+        <a href="http://localhost:4200/#/credit-admin" (click)="saveReferrer()" class="menu-item">
+          <i class="bi bi-calendar-event"></i>
+            <span>Gérer les rendez-vous</span>
+        </a>
+        <a href="http://localhost:4200/#/file-admin" (click)="saveReferrer()" class="menu-item" >
+          <i class="bi bi-sort-numeric-up"></i>
+        <span>File D'attente</span>
+      </a>
+      <a href="http://localhost:4200/#/Carte-admin" (click)="saveReferrer()"  class="menu-item">
+          <i class="bi bi-credit-card-2-back"></i>
+        <span>Demande Carte Bancaire</span>
+      </a>
+      <a href="http://localhost:4200/#/currency-administrateur" (click)="saveReferrer()" class="menu-item">
+        <i class="bi bi-currency-exchange"></i>
+        <span>Cours de Change</span>
+      </a>
+        <a href="http://localhost:4200/#/reclamation-admin" (click)="saveReferrer()" class="menu-item" class="menu-item active">
+          <i class="bi bi-exclamation-octagon"></i>
+          <span>Gérer les Réclamations</span>
+        </a>
+        <a href="http://localhost:4200/#/" class="menu-item logout">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Déconnexion</span>
+        </a>
+      </nav>
+    </div>
+    <button id="mobileSidebarToggle"  class="mobile-toggle-btn" (click)="toggleSidebar()">
+      <i class="bi bi-arrow-bar-right"></i>
+    </button>
+  
+
+
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+<div class="reclamations-list" *ngIf="reclamations.length > 0; else noReclamations">
+  <div class="inputrecherche">
+    <input type="text" class="form-control" placeholder="Rechercher par ID, Type ou Statut" [(ngModel)]="recherche" (input)="filterReclamations()" 
+            /><i class="bi bi-search"></i>
   </div>
   
-  <ng-template #noReclamations>
+  <h2><i class="bi bi-clipboard-check"></i> List des Reclamations</h2>
+  <ul>
+    <li *ngFor="let reclamation of Reclamationsfl"
+
+        [ngClass]="{
+          'reclamation-status-pending': reclamation.statut === 'En attente',
+          'reclamation-status-processed': reclamation.statut === 'traité',
+          'reclamation-status-inprogress': reclamation.statut === 'en cours',
+          'reclamation-status-default': !['en attente','en cours', 'traité'].includes(reclamation.statut)
+        }" 
+        class="reclamation-item">
+      
+      <div class="reclamation-header">
+          <div class="reclamation-id">
+            <span class="id-badge">#{{ reclamation.id }}</span>
+          </div>
+        <div class="reclamation-type">
+          <!-- Gestion sécurisée du type avec opérateur null safe -->
+          <ng-container *ngIf="reclamation.type">
+            <i *ngIf="reclamation.type.toLowerCase().includes('carte')" class="bi bi-credit-card-2-back"></i>
+            <i *ngIf="reclamation.type.toLowerCase().includes('crédit') || reclamation.type.toLowerCase().includes('credit')" class="bi bi-file-earmark-text"></i>
+            <i *ngIf="reclamation.type.toLowerCase().includes('attente') || reclamation.type.toLowerCase().includes('file')" class="bi bi-sort-numeric-up"></i>
+            <i *ngIf="!(reclamation.type.toLowerCase().includes('carte') || reclamation.type.toLowerCase().includes('crédit') || reclamation.type.toLowerCase().includes('credit') || reclamation.type.toLowerCase().includes('attente') || reclamation.type.toLowerCase().includes('file'))" class="bi bi-question-circle"></i>
+          </ng-container>
+          <ng-container *ngIf="!reclamation.type">
+            <i class="bi bi-question-circle"></i>
+          </ng-container>
+          {{ reclamation.type || 'Non spécifié' }}
+        </div>
+        <span class="status-label" [ngClass]="{
+          'status-label-pending': reclamation.statut === 'pending' || reclamation.statut === 'en attente',
+          'status-label-processed': reclamation.statut === 'processed' || reclamation.statut === 'traité',
+          'status-label-inprogress': reclamation.statut === 'inprogress' || reclamation.statut === 'en cours',
+          'status-label-default': !['en attente','en cours','traité'].includes(reclamation.statut)
+        }">
+          <i *ngIf="reclamation.statut === 'pending' || reclamation.statut === 'en attente'" class="bi bi-hourglass-split"></i>
+          <i *ngIf="reclamation.statut === 'processed' || reclamation.statut === 'traité'" class="bi bi-check-circle"></i>
+          <i *ngIf="reclamation.statut === 'inprogress' || reclamation.statut === 'en cours'" class="bi bi-eye"></i>
+          <i *ngIf="!['en attente','en cours','traité'].includes(reclamation.statut)" class="bi bi-info-circle"></i>
+          {{ reclamation.statut || 'Statut inconnu' }}
+        </span>
+      </div>
+      <div class="status-actions" style="margin-bottom: 10px;">
+        <button 
+          *ngIf="reclamation.statut == 'En attente'" 
+          class="btnencours" 
+          (click)="updateReclamationStatus(reclamation, 'en cours')">
+          Mettre en cours
+        </button>
+      
+        <button 
+          *ngIf="reclamation.statut == 'en cours'" 
+          class="btntraite" 
+          (click)="updateReclamationStatus(reclamation, 'traité')">
+          Marquer comme traité
+        </button>
+        <button 
+        *ngIf="reclamation.statut == 'traité'" 
+        class="btntsup" 
+        (click)="deleteReclamation(reclamation.id)"><i class="bi bi-trash3"></i>
+        Supprimer
+      </button>
+      </div>
+      
+
+      <div class="reclamation-content">
+        <p class="description"><i class="bi bi-chat-quote"></i> <strong>Description:</strong> {{ reclamation.description || 'Aucune description' }}</p>
+        
+        <div class="attachment-container" *ngIf="isValidLink(reclamation.pieceJointe)">
+          <button class="attachment-button" (click)="downloadFile(reclamation.pieceJointe!)">
+            <i class="bi bi-paperclip"></i> Fichier Attaché
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noReclamations>
+  <div class="no-reclamations">
+    <i class="bi bi-inbox"></i>
     <p>No reclamations found.</p>
-  </ng-template>
+  </div>
+</ng-template>
+  </body>
+</html>

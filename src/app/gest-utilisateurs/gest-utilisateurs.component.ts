@@ -20,6 +20,17 @@ export class GestUtilisateursComponent implements OnInit {
   public editUtilisateur: Utilisateur ={id:0, username:'', nom:'', prenom:'', mdp:'', email:'', telephone:'', status:'', role:''};
   public deleteUtilisateur: Utilisateur ={id:0, username:'', nom:'', prenom:'', mdp:'', email:'', telephone:'', status:'', role:''};
   isSidebarExpanded = false;
+  usernameexist = false;
+  emailInvalid = false;
+  emailExists = false;
+
+
+
+
+
+   saveReferrer() {
+  sessionStorage.setItem('from', 'true');
+}
   
   toggleSidebar() {
     this.isSidebarExpanded = !this.isSidebarExpanded;
@@ -75,6 +86,7 @@ export class GestUtilisateursComponent implements OnInit {
     document.getElementById('add-utilisateur-form')?.click();
     this.utilisateurService.addUtilisateur(addForm.value).subscribe(
       (response: Utilisateur) =>{
+        alert('Utilisateur ajouté avec succès');
         this.getUtilisateur();
         addForm.reset();
       },
@@ -84,8 +96,12 @@ export class GestUtilisateursComponent implements OnInit {
     );
   }
 
-  public onUpdateUtilisateur(utilisateur: Utilisateur): void{
-    this.utilisateurService.updateUtilisateur(utilisateur).subscribe(
+  public onUpdateUtilisateur(formValues: any): void{
+    const updated: Utilisateur = {
+    ...this.editUtilisateur,  
+    ...formValues              
+  };
+    this.utilisateurService.updateUtilisateur(updated).subscribe(
       (response: Utilisateur) =>{
         this.getUtilisateur();
       },
@@ -163,6 +179,12 @@ public onOpenModaladd(mode: string): void{
     });
   }
 
+   usernameconfirm(value: string) {
+    this.utilisateurService.checkUsernameExists(value).subscribe(exists => {
+      this.usernameexist = exists;
+    });
+  }
+
 
 
 public selectedUtilisateur: Utilisateur | null = null;
@@ -172,5 +194,22 @@ public onShowDetails(utilisateur: Utilisateur): void {
 }
 
 
-}
 
+
+
+validEmail(email: string): void {
+const exmpl = /^[a-zA-Z0-9](\.?[a-zA-Z0-9_-])*@[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+$/;
+    this.emailInvalid = !exmpl.test(email.trim());
+
+    if (!this.emailInvalid) {
+
+      this.utilisateurService.checkEmailExists(email).subscribe(exists => {
+        this.emailExists = exists;
+      });
+    } else {
+
+      this.emailExists = false;
+    }
+
+}
+}

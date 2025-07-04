@@ -3,240 +3,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>W3.CSS Template</title>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=VT323&display=swap" rel="stylesheet">
+
+
 <style>
 body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
-body {font-size:16px;}
+body {font-size:16px; background-color: rgb(31, 31, 31); color: #f1f1f1;}
 .w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
 .w3-half img:hover{opacity:1}
+
 </style>
 </head>
 <body>
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;display:none;" id="mySidebar" ><br>
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+
+<nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;display:none; background: linear-gradient(to bottom, #6c0020, #000000);" id="mySidebar" ><br>
+  <a href="javascript:void(0)" (click)="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
   <div class="w3-container">
 
-
-    <h3 class="w3-padding-64"><b>ATB<br>Space</b></h3>
+ <a href="http://localhost:4200/">
+      <img src="assets\atblogosanscadre.png" alt="logo" style="width:75%; margin-bottom: 10px; margin-top: -10px; margin-left: 20px; " class="logo" >
+    </a>
   </div>
   <div class="w3-bar-block">
    
-    <a [routerLink]="'/login'"  id="Connexion" class="w3-bar-item w3-button w3-hover-white">Connexion</a>
+    <a [routerLink]="'/login'" (click)="saveReferrer()" id="Connexion" class="w3-bar-item w3-button ">Connexion</a>
   </div>
 </nav>
 
-<!-- Top menu on small screens -->
+
 <header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
-  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" (click)="w3_open()">☰</a>
   <span>ATB Space</span>
+  <button [routerLink]="'/newuser'" (click)="saveReferrer()" class="btnnvcompteTLP">DEMANDE DE CRÉATION DE COMPTE</button>
 </header>
 
-<!-- Overlay effect when opening sidebar on small screens -->
+
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer;display:none;" title="close side menu" id="myOverlay"></div>
 
-<!-- !PAGE CONTENT! -->
+
+
+
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
+<button [routerLink]="'/newuser'" (click)="saveReferrer()" class="btnnvcompte">DEMANDE DE CRÉATION DE COMPTE</button>
 
-
-  <!-- Header -->
+<div class="partie1">
   <div class="w3-container" style="margin-top:80px" id="showcase">
-    <a href="http://localhost:4200/">
-      <img src="assets\logo atb.png" alt="logo" style="width:10% " class="logo" >
-    </a>
-    <h1 class="w3-jumbo w3-text-grey"><b>Bienvenue</b></h1>
-    <h1 class="w3-xxxlarge"><b>Showcase</b></h1>
-    <hr style="width:50px;border:5px solid #860624" class="w3-round">
-  </div>
-  
-  <!-- Photo grid (modal) -->
-  <div class="w3-row-padding">
-    <div class="w3-half">
-      <img src="/w3images/kitchenconcrete.jpg" style="width:100%" onclick="onClick(this)" alt="Concrete meets bricks">
-      <img src="/w3images/livingroom.jpg" style="width:100%" onclick="onClick(this)" alt="Light, white and tight scandinavian design">
-      <img src="/w3images/diningroom.jpg" style="width:100%" onclick="onClick(this)" alt="White walls with designer chairs">
-    </div>
-
-    <div class="w3-half">
-      <img src="/w3images/atrium.jpg" style="width:100%" onclick="onClick(this)" alt="Windows for the atrium">
-      <img src="/w3images/bedroom.jpg" style="width:100%" onclick="onClick(this)" alt="Bedroom and office in one space">
-      <img src="/w3images/livingroom2.jpg" style="width:100%" onclick="onClick(this)" alt="Scandinavian design">
-    </div>
-  </div>
-
-  <!-- Modal for full size images on click-->
-  <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
-    <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
-    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-      <img id="img01" class="w3-image">
-      <p id="caption"></p>
-    </div>
-  </div>
-
-  <!-- Services -->
-  <div class="w3-container" id="services" style="margin-top:75px">
-    <h1 class="w3-xxxlarge "><b>Services</b></h1>
-    <hr style="width:50px;border:5px solid #860624" class="w3-round">
-    <p>We are a interior design service that focus on what's best for your home and what's best for you!</p>
-    <p>Some text about our services - what we do and what we offer. We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
-  </div>
-  
-  <!-- Designers -->
-  <div class="w3-container" id="designers" style="margin-top:75px">
-    <h1 class="w3-xxxlarge"><b>Designers.</b></h1>
-    <hr style="width:50px;border:5px solid #860624" class="w3-round">
-    <p>The best team in the world.</p>
-    <p>We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
-    <p><b>Our designers are thoughtfully chosen</b>:</p>
-  </div>
-
-  <!-- The Team -->
-  <div class="w3-row-padding w3-grayscale">
-    <div class="w3-col m4 w3-margin-bottom">
-      <div class="w3-light-grey">
-        <img src="/w3images/team2.jpg" alt="John" style="width:100%">
-        <div class="w3-container">
-          <h3>John Doe</h3>
-          <p class="w3-opacity">CEO & Founder</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-        </div>
-      </div>
-    </div>
-    <div class="w3-col m4 w3-margin-bottom">
-      <div class="w3-light-grey">
-        <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
-        <div class="w3-container">
-          <h3>Jane Doe</h3>
-          <p class="w3-opacity">Designer</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-        </div>
-      </div>
-    </div>
-    <div class="w3-col m4 w3-margin-bottom">
-      <div class="w3-light-grey">
-        <img src="/w3images/team3.jpg" alt="Mike" style="width:100%">
-        <div class="w3-container">
-          <h3>Mike Ross</h3>
-          <p class="w3-opacity">Architect</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Packages / Pricing Tables -->
-  <div class="w3-container" id="packages" style="margin-top:75px">
-    <h1 class="w3-xxxlarge"><b>Packages.</b></h1>
-    <hr style="width:50px;border:5px solid #860624" class="w3-round">
-    <p>Some text our prices. Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure</p>
-  </div>
-
-  <div class="w3-row-padding">
-    <div class="w3-half w3-margin-bottom">
-      <ul class="w3-ul w3-light-grey w3-center">
-        <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
-        <li class="w3-padding-16">Floorplanning</li>
-        <li class="w3-padding-16">10 hours support</li>
-        <li class="w3-padding-16">Photography</li>
-        <li class="w3-padding-16">20% furniture discount</li>
-        <li class="w3-padding-16">Good deals</li>
-        <li class="w3-padding-16">
-          <h2>$ 199</h2>
-          <span class="w3-opacity">per room</span>
-        </li>
-        <li class="w3-light-grey w3-padding-24">
-          <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
-        </li>
-      </ul>
-    </div>
-        
-    <div class="w3-half">
-      <ul class="w3-ul w3-light-grey w3-center">
-        <li class="w3-red w3-xlarge w3-padding-32">Pro</li>
-        <li class="w3-padding-16">Floorplanning</li>
-        <li class="w3-padding-16">50 hours support</li>
-        <li class="w3-padding-16">Photography</li>
-        <li class="w3-padding-16">50% furniture discount</li>
-        <li class="w3-padding-16">GREAT deals</li>
-        <li class="w3-padding-16">
-          <h2>$ 249</h2>
-          <span class="w3-opacity">per room</span>
-        </li>
-        <li class="w3-light-grey w3-padding-24">
-          <button class="w3-button w3-red w3-padding-large w3-hover-black">Sign Up</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-  
-  <!-- Contact -->
-  <div class="w3-container" id="contact" style="margin-top:75px">
-    <h1 class="w3-xxxlarge"><b>Contact.</b></h1>
-    <hr style="width:50px;border:5px solid #860624" class="w3-round">
-    <p>Do you want us to style your home? Fill out the form and fill me in with the details :) We love meeting new people!</p>
-    <!--<form action="/action_page.php" target="_blank">-->
-      <div class="w3-section">
-        <label>Name</label>
-        <input class="w3-input w3-border" type="text" name="Name" required>
-      </div>
-      <div class="w3-section">
-        <label>Email</label>
-        <input class="w3-input w3-border" type="text" name="Email" required>
-      </div>
-      <div class="w3-section">
-        <label>Message</label>
-        <input class="w3-input w3-border" type="text" name="Message" required>
-      </div>
-
-
-
-
+    <h1 style="text-align: justify; font-weight: bold; font-size: 35px; line-height: 1.2;"><b style="
+    background: linear-gradient(to bottom, #ed0047, #430010);
+    -webkit-background-clip: text;
+    font-weight: 2500;
+    font-size: 85px;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;" class="bienvenue">Bienvenue </b> </h1>
+    <h1 class="typed-text">{{ diText }}</h1>
     
-      <button [routerLink]="'/newuser'" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Send Message</button>
-   <!-- </form>  -->
   </div>
 
-<!-- End page content -->
+
+</div>
+
+
+<div class="partie2">
+
+<div
+  id="homepageCarousel"
+  class="carousel slide"
+  data-bs-ride="carousel"
+  data-bs-interval="7000">
+
+  <div class="carousel-inner" style="background-color: #0c0c0c; border-radius: 20px;">
+    
+
+    <div
+      *ngFor="let img of images; let i = index"
+      class="carousel-item"
+      [class.active]="i === 0">
+      <img [src]="img"
+           class="d-block w-100"
+           [alt]="'Slide ' + (i + 1)" style="width: auto; height: 550px; border-radius: 20px;">
+    </div>
+  </div>
+
+</div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#homepageCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#homepageCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" ></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+
+</div>
+
+ 
+
+
+
+
+  <div class="partie3" #partie3Ref>
+  <div class="w3-container" id="services" style="margin-top:75px">
+    <h1 class="w3-xxxlarge "><b>Les Services ATB space</b></h1>
+    <hr style="width:50px;border:5px solid #860624" class="w3-round">
+  </div>
+  <div class="srv-container" style=" display: flex; flex-wrap: wrap;">
+    <div class="srv">
+      
+      <span style="color: #bd002c; font-weight: bold; font-size:20px;"><i class="bi bi-sort-numeric-up" style="font-size: 28px;"></i> File d’attente en ligne</span>
+      <hr style="width:250px;border:5px solid #860624; margin-top: 5px;" class="w3-round">
+      <p class="pargsrv">Suivez votre position dans la file et obtenez une estimation du temps d’attente. Gagnez du temps en évitant les longues attentes sur place.</p>
+    </div>
+    <div class="srv">
+
+      <span style="color: #bd002c; font-weight: bold; font-size:20px;"><i class="bi bi-calendar-event" style="font-size: 28px;"></i> Rendez-vous en ligne</span>
+      <hr style="width:250px;border:5px solid #860624; margin-top: 5px;" class="w3-round">
+      <p class="pargsrv">Planifiez facilement un rendez-vous avec un conseiller ou pour discuter de vos solutions de crédit. Choisissez votre créneau, et gagnez du temps à l’agence.</p>
+    </div>
+    <div class="srv">
+      
+      <span style="color: #bd002c; font-weight: bold; font-size:20px;"><i class="bi bi-currency-exchange" style="font-size: 28px;"></i> Cours de change</span>
+      <hr style="width:250px;border:5px solid #860624; margin-top: 5px;" class="w3-round">
+      <p class="pargsrv">Profitez des taux de change compétitifs proposés par ATB. Accédez facilement aux meilleurs taux d’achat et de vente disponibles.</p>
+    </div>
+    <div class="srv srv-m-left">
+      
+      <span style="color: #bd002c; font-weight: bold; font-size:20px;"><i class="bi bi-credit-card-2-back" style="font-size: 28px;"></i> Cartes bancaires ATB</span>
+      <hr style="width:250px;border:5px solid #860624; margin-top: 5px;" class="w3-round">
+      <p class="pargsrv">Découvrez notre large catalogue de cartes adaptées à tous les profils. Profitez de solutions simples, sécurisées et pratiques pour vos paiements au quotidien.</p>
+    </div>
+    <div class="srv srv-m-right">
+      
+      <span style="color: #bd002c; font-weight: bold; font-size:20px;"><i class="bi bi-exclamation-octagon" style="font-size: 28px;"></i> Réclamation en ligne</span>
+      <hr style="width:250px;border:5px solid #860624; margin-top: 5px;" class="w3-round">
+      <p class="pargsrv">Soumettez facilement vos réclamations sans vous déplacer. Un service rapide, simple et disponible à tout moment.</p>
+    </div>
+</div>
+  </div>
+<div class="effet">
+  <div class="txt">
+    La confiance des clients repose sur des mécanismes éprouvés et une vigilance constante
+  </div>
+    
+</div>
+
+  <div class="atbapps-container" style=" display: flex; flex-wrap: wrap;">
+  <div class="atbapps">
+    <span style="color: #bd002c; font-weight: bold; font-size:20px;"><i class="bi bi-phone" style="font-size:40px;"></i> ATB Mobile</span>
+    <hr style="width:250px;border:5px solid #860624; margin-top: 5px;" class="w3-round">
+    <p class="pargsrv">ATB Mobile vous permet de gérer vos comptes bancaires directement depuis votre smartphone. Consultez vos soldes, effectuez des virements, payez vos factures et suivez vos opérations bancaires en temps réel.</p>
+    
+    <a href="https://www.atb.tn/produits/services-atbmobile-presentation.php" class="liresuite">
+      <span style="color: #f1f1f1;">Lire la suite</span>
+      <span style="color: #bd002c; font-size: 20px;"><i class="bi bi-arrow-right"></i></span>
+    </a>
+    </div>
+    <div class="atbapps">
+      <span style="color: #bd002c; font-weight: bold; font-size:20px;"><i class="bi bi-display" style="font-size:40px;"></i> ATB Net</span>
+      <hr style="width:250px;border:5px solid #860624; margin-top: 5px;" class="w3-round">
+      <p class="pargsrv">Soucieuse d'offrir à sa clientèle des solutions innovantes, l'ATB a enrichi son service de banque en ligne ATBNET afin d'assurer une nouvelle version plus complète et plus ergonomique.</p>
+
+      <a href="https://www.atb.tn/produits/services-banque-presentation.php" class="liresuite">
+        <span style="color: #f1f1f1;">Lire la suite</span>
+        <span style="color: #bd002c; font-size: 20px;"><i class="bi bi-arrow-right"></i></span>
+      </a>
+    </div>
+</div>
+  <h1 class="w3-xxxlarge" id="actualitestlp" style="z-index: 1;"><b>Actualités</b></h1>
+  <div class="effet2">
+    <h1 class="w3-xxxlarge" id="actualites" style="z-index: 1;"><b>Actualités</b></h1>
+    <img src="assets\newshome.png" class="news1">
+    <img src="assets\newshome2.png" class="news2">
+    <img src="assets\newshome3.png" class="news3">
+  </div>
+
+  
+
+ <div style="border-radius: 20px;overflow: hidden; margin-top: 50px;">
+   <google-map
+  height="500px"
+  width="100%"
+  [center]="center"
+  [zoom]="zoom">
+  <map-marker *ngFor="let point of pointsDeVente" [position]="{lat: point.lat, lng: point.lng}" [label]="point.name"></map-marker>
+</google-map>
+</div>
+
+
+
+
+
 </div>
 
 <!-- W3.CSS Container -->
-<div class="w3-light-grey w3-container w3-padding-32"  style="margin-top:75px;padding-right:58px"><p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p></div>
+<div class="w3-container w3-padding-32 social-icons" style="margin-top:75px;padding-right:58px; background-color: #3b000e;">
+  <div id="social">
+  <span><a href="https://www.facebook.com/ArabTunisianBank/" target="_blank"><i class="bi bi-facebook"></i></a></span>
+  <span><a href="https://www.instagram.com/arab_tunisian_bank/" target="_blank"><i class="bi bi-instagram"></i></a></span>
+  <span><a href="https://www.linkedin.com/company/arabtunisianbank" target="_blank"><i class="bi bi-linkedin"></i></a></span>
+  <span><a href="https://x.com/ATBTunisie" target="_blank"><i class="bi bi-twitter"></i></a></span>
+  </div>
+</div>
 
-<script>
-
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("myOverlay").style.display = "block";
-}
  
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("myOverlay").style.display = "none";
-}
-
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
-  
-}
-</script>
-
 </body>
-</html>
+</html> 
 </div>
 
 

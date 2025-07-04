@@ -4,13 +4,14 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <img src="assets/logo atb.png"  alt="Logo ATB" style="width:40%" class="logo">
+            <img src="assets/logokeml.png"  alt="Logo ATB" style="width:40%" class="logo">
          </div>
          <div class="modal-body">
             <form #addForm="ngForm" (ngSubmit)="onAddUtilisateur(addForm)">
             <div class="form-group">
                <label for="nom">Nom</label>
                <input type="text" ngModel name="nom" id="nom" placeholder="Nom" required>
+               <input type="hidden" name="status" [ngModel]="'EN ATTENTE'" />
             </div>
             <div class="form-group">
                <label for="prenom">Prenom</label>
@@ -18,15 +19,42 @@
             </div>
             <div class="form-group">
                <label for="username">Nom d'utilisateur</label>
-               <input type="text" ngModel name="username" id="username" placeholder="username" required>
+               <input type="text" ngModel name="username" id="username" placeholder="username" (ngModelChange)="usernameconfirm(cle.value)" 
+               #cle="ngModel" minlength="4" maxlength="15" required>
+               <p *ngIf="usernameexist" style="color: red;">Ce nom d'utilisateur existe déjà.</p>
+               <p *ngIf="cle.invalid && cle.touched" style="color: red;">Le nom d'utilisateur doit être entre 4 et 15 caractères.</p>
             </div>
             <div class="form-group">
                <label for="email">Email</label>
-               <input type="email" ngModel name="email" id="email" placeholder="Email" required>
+               <input type="email" ngModel name="email" id="email" placeholder="Email"
+               #emailInput="ngModel"
+               (ngModelChange)="validEmail($event)" required>
+                     <p *ngIf="emailInvalid" style="color: red;">Le format de l email n est pas valide</p>
+                    <p *ngIf="emailExists" style="color: red;">Cette adresse e-mail est déjà utilisée</p>
             </div>
             <div class="form-group">
                <label for="mdp">Mot de passe</label>
-               <input type="password" ngModel name="mdp" id="mdp" placeholder="Mot de passe" required>
+               <p style="color: red; font-size: 12px; margin-top: 2px;">
+                  Le mot de passe doit contenir au moins 10 caractères, une majuscule, un chiffre, et un caractère spécial.
+               </p>
+               <input type="password" ngModel name="mdp" id="mdp" placeholder="Mot de passe" (ngModelChange)="mdpconfirm(key.value)" 
+               #key="ngModel"  required>
+               <div style="height: 10px; width: 105.5%; background: #c5c5c5; border-radius: 5px; margin-top: 10px;">
+                  <div [ngStyle]="{
+                        'width': (passworddure * 25) + '%',
+                        'height': '100%',
+                        'border-radius': '5px',
+                        'transition': 'width 0.3s ease',
+                        'background-color': 
+                          passworddure === 1 ? '#ff1010' :
+                          passworddure === 2 ? '#fff710' :
+                          passworddure === 3 ? '#ffa710' :
+                          passworddure === 4 ? '#2ee600' :
+                          'transparent'
+                      }">
+                  </div>
+                </div>
+                
             </div>
             <div class="form-group">
                 <label for="telephone">Telephone</label>
@@ -34,7 +62,42 @@
              </div>
             <div class="modal-footer">
 
-               <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Inscription</button>
+               <div class="form-group">
+               <label for="question1">Question de sécurité 1</label>
+               <select ngModel name="question1" id="question1" required>
+                  <option value="" disabled selected>Choisissez une question</option>
+                  <option value="Q11">Quel est le nom de votre mère ?</option>
+                  <option value="Q12">Dans quelle ville êtes-vous né ?</option>
+                  <option value="Q13">Quel est le nom de votre animal préféré ? (chien ou chat)</option>
+               </select>
+               <input type="text" ngModel name="reponse1" id="reponse1" placeholder="Votre réponse" required>
+               </div>
+
+               
+               <div class="form-group">
+               <label for="question2">Question de sécurité 2</label>
+               <select ngModel name="question2" id="question2" required>
+                  <option value="" disabled selected>Choisissez une question</option>
+                  <option value="Q21">Quel est votre film préféré ?</option>
+                  <option value="Q22">Quel est le nom de votre meilleur ami d'enfance ?</option>
+                  <option value="Q23">Quelle est votre voiture de rêve ?</option>
+               </select>
+               <input type="text" ngModel name="reponse2" id="reponse2" placeholder="Votre réponse" required>
+               </div>
+
+              
+               <div class="form-group">
+               <label for="question3">Question de sécurité 3</label>
+               <select ngModel name="question3" id="question3" required>
+                  <option value="" disabled selected>Choisissez une question</option>
+                  <option value="Q31">Quel métier rêviez-vous de faire enfant ?</option>
+                  <option value="Q32">Quel est le nom de votre enseignant préféré ?</option>
+                  <option value="Q33">Avez-vous un chien ou un chat ? Si oui, quel est son nom ?</option>
+               </select>
+               <input type="text" ngModel name="reponse3" id="reponse3" placeholder="Votre réponse" required>
+               </div>
+
+               <button [disabled]="addForm.invalid || passworddure < 4 || usernameexist || !emailInput.value.trim() || emailInvalid || emailExists" type="submit" class="btn btn-primary" >Inscription</button>
             </div>
             </form>
          </div>

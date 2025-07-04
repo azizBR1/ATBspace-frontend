@@ -3,7 +3,9 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { appRouting } from './app/app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-//import { authinterceptorInterceptor } from './app/authinterceptor.interceptor';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 
 

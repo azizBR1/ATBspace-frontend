@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crédit Sakan - ATB</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<div class="btnfixe">
+    <a href="assets/Demande-de-credit.pdf" target="_blank" class="btn-demande" style="background-color: #f000eccf;">Telecharger la demande <i class="bi bi-download" style="margin-left: 50px;font-size: 1.5rem;"></i></a>
+</div>
+<body>
+    <div class="sidebar" id="mySidebar">
+        <div class="sidebar-header">
+          <a href="http://localhost:4200/#/espace-utilisateur" >
+          <img src="assets/logo atb.png"alt="Logo" class="sidebar-logo">
+        </a>
+          <h3 class="sidebar-title">
+            <b>
+              <span class="admin-text">User</span><br>
+              <span class="space-text">Space</span>
+            </b>
+          </h3>
+        </div>
+<nav class="sidebar-menu">
+        <a href="http://localhost:4200/#/file-utilisateur" class="menu-item">
+            <i class="bi bi-sort-numeric-up"></i>
+          <span>File D'attente</span>
+        </a>
+        <a href="http://localhost:4200/#/credit-utilisateur" class="menu-item active">
+            <i class="bi bi-file-earmark-text"></i>
+          <span>Crédit Bancaire</span>
+        </a>
+        <a href="http://localhost:4200/#/Carte-utilisateur"  class="menu-item">
+            <i class="bi bi-credit-card-2-back"></i>
+          <span>Demande Carte Bancaire</span>
+        </a>
+        <a href="http://localhost:4200/#/currency-utilisateur"  class="menu-item">
+          <i class="bi bi-currency-exchange"></i>
+        <span>Cours de Change</span>
+      </a>
+        
+        <a href="http://localhost:4200/#/reclamation-utilisateur"  class="menu-item">
+            <i class="bi bi-exclamation-octagon"></i>
+          <span>Réclamation</span>
+        </a>
+
+                     <a href="http://localhost:4200/#/parametre-utilisateur"  class="menu-item">
+                <i class="bi bi-gear"></i>
+              <span>Parametres</span>
+            </a>
+
+        <a href="http://localhost:4200/#/" class="menu-item logout">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Déconnexion</span>
+        </a>
+      </nav>
+      </div>
+      <button id="mobileSidebarToggle"  class="mobile-toggle-btn" (click)="toggleSidebar()">
+        <i class="bi bi-arrow-bar-right"></i>
+      </button>
+
+
+<div class="tousmbl">
+  <div class="banniere-principale fade-in">
+    <h1>Crédit Sakan ATB</h1>
+    <p>La solution idéale pour devenir propriétaire sans contraintes financières</p>
+  </div>
+
+  <div class="introduction fade-in">
+    <p>Vous souhaitez accéder à la propriété ? Mais vous redoutez que le remboursement ne soit synonyme de sacrifices et de budget serré à long terme.</p>
+    <p>N'y pensez plus, le Crédit Sakan de l'ATB vous propose un financement aux meilleures conditions.</p>
+  </div>
+
+  <div class="section fade-in" style="background-image: url('/assets/sakanblur2.png');background-size: cover; background-position: center;background-repeat: no-repeat;">
+    <h2>Quel logement ?</h2>
+    <p><strong>Sakan</strong> vous permet :</p>
+    <ul>
+        <li>D'acquérir ou de construire un logement principal ou secondaire</li>
+        <li>D'acheter un terrain pour la construction</li>
+    </ul>
+  </div>
+</div>
+  <div class="section fade-in">
+    <h2>Un logement pour qui :</h2>
+    <ul>
+        <li>Vous êtes une personne physique tunisienne majeure résidente ou non résidente en Tunisie ?</li>
+        <li>Vous êtes salarié, professionnel, commerçant ou artisan ?</li>
+    </ul>
+  </div>
+
+  <div class="section logement-vie fade-in">
+    <h2>Un logement pour la vie</h2>
+    <p>
+        Un financement à hauteur de <strong>80% du coût de votre acquisition</strong>. <br>
+        Une durée de remboursement pouvant atteindre <strong>20 ans</strong> avec <strong>3 mois de grâce concernant le capital</strong>.
+    </p>
+  </div>
+
+  <div class="section logement-sans-obstacle fade-in">
+    <h2>Un logement sans obstacle</h2>
+    <p>
+        Pas besoin d'épargne préalable. Toutefois, les détenteurs d'un compte d'épargne ATB El Khir bénéficient d'une bonification du taux de leur crédit. <br>
+        Pas besoin d'ancienneté de compte ouvert à l'ATB.
+    </p>
+  </div>
+
+  <div class="section logement-deux fade-in">
+    <h2>Un logement à deux</h2>
+    <p>
+        Si vous êtes marié, l'ATB vous offre la possibilité de prendre en compte votre revenu et celui de votre conjoint pour l'octroi du crédit Sakan.
+    </p>
+  </div>
+
+  <div class="avantages">
+    <div class="avantage-item">
+      <div class="avantage-icon"><i class="bi bi-house-heart"></i></div>
+      <div class="avantage-title">Financement jusqu'à 80%</div>
+      <p>Un financement adapté à votre projet immobilier</p>
+    </div>
+    <div class="avantage-item">
+      <div class="avantage-icon"><i class="bi bi-calendar-check"></i></div>
+      <div class="avantage-title">Durée jusqu'à 20 ans</div>
+      <p>Une longue période de remboursement pour alléger vos mensualités</p>
+    </div>
+    <div class="avantage-item">
+      <div class="avantage-icon"><i class="bi bi-people"></i></div>
+      <div class="avantage-title">Revenus du couple</div>
+      <p>Possibilité de cumuler les revenus pour une meilleure capacité d'emprunt</p>
+    </div>
+  </div>
+
+  <div class="note-importante">
+    <p><strong>Note :</strong> Les conditions du crédit peuvent varier selon votre profil. Consultez votre conseiller ATB pour une offre personnalisée.</p>
+  </div>
+
+  <div class="text-center">
+    <a href="http://localhost:4200/#/rdv-utilisateur" class="btn-demande">
+      Prendre un rendez-vous
+    </a>
+  </div>
+  
+  <div class="text-center">
+    <a href="assets/Demande-de-credit.pdf " target="_blank"class="btn-download">
+      <i class="bi bi-download" style="font-size: 1.5rem;"></i> Demande de crédit
+    </a>
+  </div>
+  <div class="footer">
+    <img src="assets/logo atb.png" alt="Logo ATB" class="logo-atb">
+    <p>© 2025 ATB - Arab Tunisian Bank | Tous droits réservés</p>
+  </div>
+</body>
+</html>

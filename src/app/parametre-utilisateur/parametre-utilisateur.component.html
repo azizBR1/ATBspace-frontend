@@ -1,0 +1,128 @@
+ 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+
+ <body>
+  <div class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+      <a href="http://localhost:4200/#/espace-utilisateur" (click)="saveReferrer()" >
+        <img src="assets/logo atb.png"alt="Logo" class="sidebar-logo">
+      </a>
+      <h3 class="sidebar-title">
+        <b>
+          <span class="admin-text">User</span><br>
+          <span class="space-text">Space</span>
+        </b>
+      </h3>
+    </div>
+    <nav class="sidebar-menu">
+      <a href="http://localhost:4200/#/file-utilisateur" class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-sort-numeric-up"></i>
+        <span>File D'attente</span>
+      </a>
+      <a href="http://localhost:4200/#/credit-utilisateur" class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-file-earmark-text"></i>
+        <span>Crédit Bancaire</span>
+      </a>
+      <a href="http://localhost:4200/#/Carte-utilisateur"  class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-credit-card-2-back"></i>
+        <span>Demande Carte Bancaire</span>
+      </a>
+      <a href="http://localhost:4200/#/currency-utilisateur"  class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-currency-exchange"></i>
+      <span>Cours de Change</span>
+    </a>
+      <a href="http://localhost:4200/#/reclamation-utilisateur"   class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-exclamation-octagon"></i>
+        <span>Réclamation</span>
+      </a>
+
+      <a href="http://localhost:4200/#/parametre-utilisateur"  class="menu-item active" (click)="saveReferrer()">
+         <i class="bi bi-gear"></i>
+        <span>Parametres</span>
+      </a>
+      
+      <a href="http://localhost:4200/#/" class="menu-item logout">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Déconnexion</span>
+      </a>
+    </nav>
+  </div>
+  <button id="mobileSidebarToggle"  class="mobile-toggle-btn" (click)="toggleSidebar()">
+    <i class="bi bi-arrow-bar-right"></i>
+  </button>
+
+
+
+<div *ngIf="utilisateurusername" id="contenue">
+    <button (click)="renitiamdp()">Changer le mot de passe</button>
+  <div>
+    <p>Nom : {{ utilisateurusername.nom }} 
+      <button (click)="openModal('nom')">Modifier</button>
+    </p>
+  </div>
+  <div>
+    <p>Prénom : {{ utilisateurusername.prenom }}
+      <button (click)="openModal('prenom')">Modifier</button>
+    </p>
+  </div>
+  
+  <div>
+    <p>Email : {{ utilisateurusername.email }}
+      <button (click)="openModal('email')">Modifier</button>
+    </p>
+  </div>
+  <div>
+    <p>Téléphone : {{ utilisateurusername.telephone }}
+      <button (click)="openModal('telephone')">Modifier</button>
+    </p>
+  </div>
+  
+  <p *ngIf="totp">TOTP : {{ totp }} </p>
+  <button (click)="desactiverTotp()">Refresh TOTP</button>
+</div>
+<p>Username Oublié ??</p>
+<button (click)="openQuestionModal()">Répondre aux Questions</button>
+
+
+<div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Modifier {{ currentField | titlecase }}</h3>
+    <input [(ngModel)]="updatedValue" name="updatedValue"  type="text" />
+    <br />
+    <button (click)="saveChange()">Enregistrer</button>
+    <button (click)="closeModal()">Annuler</button>
+  </div>
+</div>
+
+
+
+<div *ngIf="isQuestionModalOpen" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Veuillez répondre aux questions suivantes :</h3>
+
+    <p>{{ questionLabel1 }}</p>
+    <input [(ngModel)]="reponse1" type="text" />
+
+    <p>{{ questionLabel2 }}</p>
+    <input [(ngModel)]="reponse2" type="text" />
+
+    <p>{{ questionLabel3 }}</p>
+    <input [(ngModel)]="reponse3" type="text" />
+
+    <br><br>
+    <button (click)="submitQuestions()">Envoyer</button>
+    <button (click)="closeQuestionModal()">Annuler</button>
+  </div>
+</div>
+
+</body>
+</html>

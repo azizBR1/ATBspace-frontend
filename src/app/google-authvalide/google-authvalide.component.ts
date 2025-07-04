@@ -69,4 +69,8 @@ moveFocus(index: number, event: any) {
 }
 
 
+ saveReferrer() {
+  sessionStorage.setItem('from', 'true');
+}
+
 }

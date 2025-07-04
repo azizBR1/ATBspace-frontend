@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  
+</head>
+<body>
+  <div class="sidebar" id="mySidebar">
+          <div class="sidebar-header">
+            <a href="http://localhost:4200/#/espace-utilisateur" >
+            <img src="assets/logo atb.png"alt="Logo" class="sidebar-logo">
+          </a>
+            <h3 class="sidebar-title">
+              <b>
+                <span class="admin-text">User</span><br>
+                <span class="space-text">Space</span>
+              </b>
+            </h3>
+          </div>
+          <nav class="sidebar-menu">
+            <a href="http://localhost:4200/#/file-utilisateur" class="menu-item active" >
+                <i class="bi bi-sort-numeric-up"></i>
+              <span>File D'attente</span>
+            </a>
+            <a href="http://localhost:4200/#/credit-utilisateur" class="menu-item">
+                <i class="bi bi-file-earmark-text"></i>
+              <span>Crédit Bancaire</span>
+            </a>
+            <a href="http://localhost:4200/#/Carte-utilisateur"  class="menu-item">
+                <i class="bi bi-credit-card-2-back"></i>
+              <span>Demande Carte Bancaire</span>
+            </a>
+            <a href="http://localhost:4200/#/currency-utilisateur"  class="menu-item">
+              <i class="bi bi-currency-exchange"></i>
+            <span>Cours de Change</span>
+          </a>
+            
+            <a href="http://localhost:4200/#/reclamation-utilisateur"  class="menu-item">
+                <i class="bi bi-exclamation-octagon"></i>
+              <span>Réclamation</span>
+            </a>
+             <a href="http://localhost:4200/#/parametre-utilisateur"  class="menu-item">
+                <i class="bi bi-gear"></i>
+              <span>Parametres</span>
+            </a>
+            <a href="http://localhost:4200/#/" class="menu-item logout"> 
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Déconnexion</span>
+            </a>
+          </nav>
+        </div>
+        <button id="mobileSidebarToggle"  class="mobile-toggle-btn" (click)="toggleSidebar()">
+          <i class="bi bi-arrow-bar-right"></i>
+        </button>
+      
+
+
+
+
+<div *ngIf="ticketexist && laFile" class="ticket-container">
+  <div class="ticket-content">
+    <div class="ticket-header">
+      <h2>Votre Numéro de Ticket</h2>
+    </div>
+    <p class="ticket-number">{{ laFile.id }}</p>
+    <div class="ticket-details">
+      <h3>Détails</h3>
+      <ul class="ticket-info-list">
+        <li class="ticket-info-item" >
+          <span class="ticket-info-label">Code:</span>
+          <span class="ticket-info-value" *ngIf="codeafficher">{{ laFile.code}}</span>
+          <i 
+          class="{{ codeafficher ? 'bi bi-eye-slash' : 'bi bi-eye' }}" 
+          (click)="toggleCodeAffichage()" 
+          style="cursor: pointer; font-size: 1.2rem; color: black;"
+          title="Afficher/Masquer la durée">
+        </i>
+        </li>
+        <li class="ticket-info-item" >
+          <span class="ticket-info-label">Durée d'attente :</span>
+          <span class="ticket-info-value" >{{ laFile.dureetotal - laFile.duree }} minutes</span>
+        
+        </li>
+        <li class="ticket-info-item">
+          <span class="ticket-info-label">Service:</span>
+          <span class="ticket-info-value">{{ laFile.service }}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="ticket-position">
+      Votre position: {{ laFile.position }}
+    </div>
+    <div class="ticket-date">
+      <span class="calendar-icon"></span> {{ laFile.createdAt | date: 'dd/MM/yyyy HH:mm'  }}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!ticketexist" class="form-container">
+  <h2 class="formulaire-titre">Demander un Ticket</h2>
+  <form (submit)="onSubmit()">
+    <div class="champ-formulaire">
+      <label for="service-select">Service:</label>
+      <select 
+        id="service-select"
+        [(ngModel)]="service" 
+        name="service" 
+        required 
+        (change)="Defduree()">
+        <option value="">-- Sélectionner un service --</option>
+        <option value="Versement_et_retrait">Versement et retrait</option>
+        <option value="Consultation_de_compte">Consultation de compte</option>
+        <option value="Relevé_de_compte">Relevé de compte</option>
+        <option value="Délivrance_de_chéquier">Délivrance de chéquier</option>
+        <option value="Virement">Virement</option>
+        <option value="Autre">Autre</option>
+      </select>
+    </div>
+    <button type="submit" class="bouton-soumettre" [disabled]="!isServiceValid()">Soumettre</button>
+  </form>
+
+</div>
+</body>
+</html>

@@ -34,7 +34,7 @@
 
                     <!-- Ligne d'action -->
                     <div class="action-row">
-                        <button type="submit" [disabled]="totpForm.invalid" class="verify-button">
+                        <button type="submit" [disabled]="totpForm.invalid" class="verify-button" (click)="saveReferrer()">
                             Vérifier le Code
                         </button>
                     </div>

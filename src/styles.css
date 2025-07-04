@@ -1,1 +1,59 @@
-/* You can add global styles to this file, and also import other style files */
+
+.flatpickr-calendar {
+
+    background-color: #181818 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 10px rgba(189, 0, 218, 0.268) !important;
+    width: 300px !important;
+
+  }
+
+
+  .flatpickr-calendar .flatpickr-day {
+    color: rgb(255, 255, 255) !important;
+  }
+  .flatpickr-calendar .flatpickr-weekday {
+    color: white !important;
+  }
+  .flatpickr-calendar .flatpickr-current-month,
+.flatpickr-calendar .flatpickr-months .flatpickr-month {
+  color: white !important;
+}
+.flatpickr-calendar .flatpickr-time {
+    background: #292929 !important;
+  }
+
+  .flatpickr-calendar .flatpickr-time input,
+.flatpickr-calendar .flatpickr-time .flatpickr-am-pm {
+  color: rgb(0, 0, 0) !important;
+}
+
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.blocked-date {
+  color: rgba(242, 0, 255, 0.31) !important;
+  opacity: 1 !important;  
+  cursor: not-allowed !important;
+}
+
+
+.flatpickr-calendar .flatpickr-day.disabled,
+.flatpickr-calendar .flatpickr-day.blocked-date {
+  opacity: 0.1;
+  cursor: not-allowed;
+  color: #9c13ff !important;
+}
+
+
+.flatpickr-calendar .flatpickr-day.selected,
+.flatpickr-calendar .flatpickr-day.startRange,
+.flatpickr-calendar .flatpickr-day.endRange {
+  background: #9c13ff !important;
+  border-color: #9c13ff !important;
+
+}
+
+
+
+
+
+

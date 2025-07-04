@@ -17,10 +17,28 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ReclamationUtilisateurComponent {
   isSidebarExpanded = false;
   selectedFile: File | null = null;
+  reclamations: Reclamation[] = [];
 
   constructor(private reclamationService: ReclamationUtilisateurService,
 
   ) {}
+
+
+  loadReclamationsByUser(): void {
+    const username = localStorage.getItem('username');
+    if (!username) {
+      console.error('Aucun username');
+      return;
+    }
+    this.reclamationService.getReclamationsByUserId(username).subscribe(
+      (data: Reclamation[]) => {
+        this.reclamations = data;
+      },
+      (error) => {
+        console.error('Erreur:', error);
+      }
+    );
+  }
         
   toggleSidebar() {
     this.isSidebarExpanded = !this.isSidebarExpanded;
@@ -34,7 +52,7 @@ export class ReclamationUtilisateurComponent {
       sidebar?.classList.add('expanded');
       body.classList.add('sidebar-expanded');
       if (toggleButton) {
-        toggleButton.style.left = '270px';
+        toggleButton.style.left = '290px';
       }
       if (buttonIcon) {
         buttonIcon.className = 'bi bi-arrow-bar-left';

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+</head>
+<body>
+
+<div class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+      <a href="http://localhost:4200/#/espace-utilisateur" (click)="saveReferrer()" >
+        <img src="assets/logo atb.png"alt="Logo" class="sidebar-logo">
+      </a>
+      <h3 class="sidebar-title">
+        <b>
+          <span class="admin-text">User</span><br>
+          <span class="space-text">Space</span>
+        </b>
+      </h3>
+    </div>
+    <nav class="sidebar-menu">
+      <a href="http://localhost:4200/#/file-utilisateur" class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-sort-numeric-up"></i>
+        <span>File D'attente</span>
+      </a>
+      <a href="http://localhost:4200/#/credit-utilisateur" class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-file-earmark-text"></i>
+        <span>Crédit Bancaire</span>
+      </a>
+      <a href="http://localhost:4200/#/Carte-utilisateur"  class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-credit-card-2-back"></i>
+        <span>Demande Carte Bancaire</span>
+      </a>
+      <a href="http://localhost:4200/#/currency-utilisateur"  class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-currency-exchange"></i>
+      <span>Cours de Change</span>
+    </a>
+      <a href="http://localhost:4200/#/reclamation-utilisateur"   class="menu-item" (click)="saveReferrer()">
+        <i class="bi bi-exclamation-octagon"></i>
+        <span>Réclamation</span>
+      </a>
+
+      <a href="http://localhost:4200/#/parametre-utilisateur" class="menu-item" (click)="saveReferrer()">
+         <i class="bi bi-gear"></i>
+        <span>Parametres</span>
+      </a>
+      
+      <a href="http://localhost:4200/#/" class="menu-item logout">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Déconnexion</span>
+      </a>
+    </nav>
+  </div>
+  <button id="mobileSidebarToggle"  class="mobile-toggle-btn" (click)="toggleSidebar()">
+    <i class="bi bi-arrow-bar-right"></i>
+  </button>
+
+
+  
+<form #rdvForm="ngForm" id="rdvForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="typerdv">Type de rendez-vous</label>
+      <div class="custom-control custom-radio" id="sakan">
+        <input type="radio" id="typeCreditSakan" name="type" class="custom-control-input" value="Crédit Sakan" [(ngModel)]="Credit.type">
+        <label class="custom-control-label" for="typeCreditSakan">
+            <i class="bi bi-house"></i>Crédit Sakan
+        </label>
+      </div>
+      <div class="custom-control custom-radio" id="tahawel">
+        <input type="radio" id="typeCreditTahawel" name="type" class="custom-control-input" value="Crédit Tahawel" [(ngModel)]="Credit.type">
+        <label class="custom-control-label" for="typeCreditTahawel">
+            <i class="bi bi-houses"></i> Crédit Tahawel
+        </label>
+      </div>
+      <div class="custom-control custom-radio" id="awelsakan">
+        <input type="radio" id="typeCreditAwelSakan" name="type" class="custom-control-input" value="Crédit Awel Sakan" [(ngModel)]="Credit.type">
+        <label class="custom-control-label" for="typeCreditAwelSakan">
+            <i class="bi bi-key" ></i>Crédit Awel Sakan
+        </label>
+      </div>
+      <div class="custom-control custom-radio" id="renov">
+        <input type="radio" id="typeCredit" name="type" class="custom-control-input" value="Crédit Renov" [(ngModel)]="Credit.type">
+        <label class="custom-control-label" for="typeCredit">
+            <i class="bi bi-paint-bucket"></i> Crédit Renov
+        </label>
+      </div>
+      <div class="custom-control custom-radio" id="sayara">
+        <input type="radio" id="typeCreditSayara" name="type" class="custom-control-input" value="Crédit Sayara" [(ngModel)]="Credit.type">
+        <label class="custom-control-label" for="typeCreditSayara">
+            <i class="bi bi-car-front-fill"></i> Crédit Sayara
+        </label>
+      </div>
+      <div class="custom-control custom-radio" id="start">
+        <input type="radio" id="typeCreditStart" name="type" class="custom-control-input" value="Crédit Start" [(ngModel)]="Credit.type">
+        <label class="custom-control-label" for="typeCreditStart">
+            <i class="bi bi-person-vcard"></i> Crédit Start
+        </label>
+      </div>
+      <div class="custom-control custom-radio" id="mounassib">
+        <input type="radio" id="typeCreditMounassib" name="type" class="custom-control-input" value="Crédit Mounassib" [(ngModel)]="Credit.type">
+        <label class="custom-control-label" for="typeCreditMounassib">
+            <i class="bi bi-cake"></i> Crédit Mounassib
+        </label>
+      </div>
+      <div class="custom-control custom-radio"id="bienetre">
+        <input type="radio" id="typeCreditBienetre" name="type" class="custom-control-input" value="Crédit Bien etre" [(ngModel)]="Credit.type">
+        <label class="custom-control-label" for="typeCreditBienetre">
+            <i class="bi bi-lungs"></i> Crédit Bien etre
+        </label>
+      </div>
+      <div class="custom-control custom-radio" id="autre">
+        <input type="radio" id="typeAutre" name="type" class="custom-control-input" value="Autre" [(ngModel)]="Credit.type">
+        <label class="custom-control-label" for="typeAutre">
+          <i class="bi bi-question-circle"></i> Autre
+        </label>
+      </div>
+    </div>
+
+    <div id="calendarContainer"></div>
+    <input 
+  id="rdvDateTimePicker"
+  type="text"
+  class="form-control"
+  placeholder="Sélectionner la date et l'heure"
+  [(ngModel)]="Credit.date"
+  [ngModel]="null"  
+  name="date"
+  readonly
+  style="width: 174px; margin-left: 63px;user-select: none;"  required>
+
+ 
+
+
+
+    <div class="text-right mt-4">
+        <button type="submit"  class="btn btn-submit" [disabled]="!isFormValid()">
+          <i class="bi bi-send"></i> Soumettre la demande
+        </button>
+      </div>
+  </form>
+</body>

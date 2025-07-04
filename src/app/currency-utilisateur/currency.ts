@@ -4,5 +4,5 @@ export interface Currency {
     unite: string;
     txa: number;
     txv: number;
-    date: string;
+    date: Date;
   }

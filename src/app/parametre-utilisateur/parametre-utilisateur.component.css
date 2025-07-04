@@ -1,0 +1,686 @@
+/* Style sombre moderne pour la page paramètres */
+body,html {
+  background-color: #0f0f13;
+  color: #e0e0e0;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(134, 6, 36, 0.15), transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Contenu principal avec glassmorphism */
+#contenue {
+  background-color: rgba(24, 24, 30, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #f0f0f0;
+  padding: 30px 40px;
+  border-radius: 16px;
+  margin: 80px 30px 30px 120px; /* Garde l'espace pour la sidebar */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+#contenue::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(134, 6, 36, 0.15), transparent 70%);
+  z-index: -1;
+}
+
+/* Style des sections d'information */
+#contenue div {
+  padding: 16px 0;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+#contenue div:hover {
+  transform: translateX(5px);
+  background: linear-gradient(90deg, transparent, rgba(134, 6, 36, 0.05));
+  border-bottom: 1px solid rgba(134, 6, 36, 0.3);
+}
+
+#contenue p {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 5px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+
+#contenue p::after {
+  content: attr(value);
+  font-weight: 600;
+  margin-left: auto;
+}
+
+#contenue button {
+  background: linear-gradient(135deg, #860624, #a50a2c);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 18px;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 12px rgba(134, 6, 36, 0.3);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+#contenue button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 15px rgba(134, 6, 36, 0.4);
+  background: linear-gradient(135deg, #a50a2c, #860624);
+}
+
+#contenue button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(134, 6, 36, 0.4);
+}
+
+
+#contenue button:first-child {
+  background: linear-gradient(135deg, #222228, #333340);
+  display: flex;
+  align-items: center;
+  margin: 0 0 25px 0;
+  padding: 15px 24px;
+  width: auto;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+}
+
+#contenue button:first-child::before {
+  content: '\F47B';
+  font-family: "bootstrap-icons";
+  margin-right: 12px;
+  color: #860624;
+  font-size: 18px;
+}
+
+#contenue button:first-child:hover {
+  background: linear-gradient(135deg, #2c2c36, #3c3c4c);
+  transform: translateY(-3px);
+}
+
+/* Style pour le paragraphe "Username Oublié" */
+#contenue + p {
+  color: #a60000;
+  margin: 20px 0 10px 120px; 
+  font-weight: 600;
+  letter-spacing: 1px;
+  display: block;
+}
+
+
+#contenue + p + button {
+  background: linear-gradient(135deg, #860624, #a50a2c);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  margin-bottom: 100px;
+  margin-left: 120px; /* Aligné avec le contenu principal */
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 15px rgba(134, 6, 36, 0.3);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  display: block;
+}
+
+#contenue + p + button:hover {
+  background: linear-gradient(135deg, #a50a2c, #860624);
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(134, 6, 36, 0.4);
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.modal-content {
+  background: linear-gradient(145deg, #1a1a20, #26262e);
+  color: #f0f0f0;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+              inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  width: 380px;
+  padding: 30px;
+  animation: modalAppear 0.4s ease-out;
+  margin: 0 auto; 
+  position: relative;
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-content h3 {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.modal-content h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #860624, transparent);
+  border-radius: 3px;
+}
+
+.modal-content input {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #f0f0f0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 14px;
+  width: 100%;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.modal-content input:focus {
+  border-color: #860624;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(134, 6, 36, 0.2);
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.modal-content button {
+  background: linear-gradient(135deg, #860624, #a50a2c);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 13px;
+}
+
+.modal-content button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 14px rgba(134, 6, 36, 0.3);
+  background: linear-gradient(135deg, #a50a2c, #860624);
+}
+
+.modal-content button:last-child {
+  background: linear-gradient(135deg, #2c2c36, #3c3c4c);
+}
+
+.modal-content button:last-child:hover {
+  background: linear-gradient(135deg, #3c3c4c, #2c2c36);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.3);
+}
+
+
+#contenue div p::before {
+  font-family: "bootstrap-icons";
+  margin-right: 15px;
+  font-size: 18px;
+  background: linear-gradient(135deg, #860624, #c30a38);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+#contenue div:nth-of-type(1) p::before {
+  content: "\F47C"; /* Icône d'utilisateur (person) pour le nom */
+}
+
+#contenue div:nth-of-type(2) p::before {
+  content: "\F4D3"; /* Icône de profil (person-badge) pour le prénom */
+}
+
+#contenue div:nth-of-type(3) p::before {
+  content: "\F32F"; /* Icône d'enveloppe (envelope) pour l'email */
+}
+
+#contenue div:nth-of-type(4) p::before {
+  content: "\F596"; /* Icône de téléphone pour le téléphone */
+}
+
+/* Style pour le TOTP avec effet de pulsation */
+#contenue p[class*="totp"]::before {
+  content: "\F5CA"; /* Icône shield-lock pour le TOTP */
+  font-family: "bootstrap-icons";
+  margin-right: 15px;
+  background: linear-gradient(135deg, #860624, #c30a38);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Style spécifique pour le bouton refresh TOTP */
+#contenue button:nth-last-child(1) {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, #333340, #2a2a32);
+  margin-top: 15px;
+}
+
+#contenue button:nth-last-child(1)::before {
+  content: "\F33D"; /* Icône refresh */
+  font-family: "bootstrap-icons";
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+#contenue button:nth-last-child(1):hover {
+  background: linear-gradient(135deg, #3c3c4c, #2c2c36);
+}
+
+/* Animation pour les éléments au chargement */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#contenue > * {
+  animation: slideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+#contenue > *:nth-child(1) { animation-delay: 0.1s; }
+#contenue > *:nth-child(2) { animation-delay: 0.2s; }
+#contenue > *:nth-child(3) { animation-delay: 0.3s; }
+#contenue > *:nth-child(4) { animation-delay: 0.4s; }
+#contenue > *:nth-child(5) { animation-delay: 0.5s; }
+#contenue > *:nth-child(6) { animation-delay: 0.6s; }
+
+/* Effet de surbrillance au survol */
+#contenue div:hover p::before {
+  animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px rgba(134, 6, 36, 0.5);
+  }
+  to {
+    text-shadow: 0 0 10px rgba(134, 6, 36, 0.8), 0 0 15px rgba(134, 6, 36, 0.5);
+  }
+}
+
+/* Ajout d'un style pour le titre du TOTP */
+#contenue p:contains("TOTP") {
+  font-weight: 600;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+/* Effet de reflet sur les boutons */
+#contenue button {
+  position: relative;
+  overflow: hidden;
+}
+
+#contenue button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: transform 0.7s;
+}
+
+#contenue button:hover::after {
+  transform: rotate(30deg) translateX(150%);
+}
+
+/* Media queries pour responsivité */
+@media (max-width: 768px) {
+  #contenue {
+    margin: 20px 15px 20px 15px;
+    padding: 25px;
+  }
+  
+  #contenue + p,
+  #contenue + p + button {
+    padding-left: 30px;
+    margin-left: 15px;
+  }
+  
+  .modal-content {
+    width: 90%;
+    max-width: 350px;
+  }
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a20;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #860624;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a50a2c;
+}
+
+    
+    body.sidebar-expanded {
+      padding-left: 260px;
+    }
+    
+    .sidebar {
+      background: linear-gradient(to bottom, #000000, #5e5e5e);
+      width: 70px;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 1000;
+      transition: width 0.3s ease;
+      overflow: hidden;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    }
+    
+    .sidebar:hover {
+      width: 280px;
+    }
+    
+    .sidebar-header {
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .sidebar-logo {
+      width: 55px;
+      height: 55px;
+      margin-right: 15px;
+    }
+    
+    .sidebar-title {
+      white-space: nowrap;
+      line-height: 0.8;
+    }
+    
+    .admin-text {
+      font-size: 28px;
+      color: rgb(189, 189, 189);
+    }
+    
+    .space-text {
+      font-size: 20px;
+      color: white;
+    }
+    
+    .sidebar-menu {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    
+    .menu-item:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .menu-item i {
+      font-size: 20px;
+      min-width: 30px;
+      margin-left: 5px;
+    }
+    
+    .menu-item span {
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+    
+    .logout {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+    }
+    
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 990;
+    }
+    
+    .container {
+      margin-top: 20px;
+    }
+    
+    .card {
+      border: none;
+      -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+      box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+      margin-bottom: 30px;
+      background: white;
+    }
+    
+    .w-60 {
+      width: 60px;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0 0 10px;
+      font-weight: 600;
+    }
+    
+    .social-links li a {
+      -webkit-border-radius: 50%;
+      background-color: rgba(89,206,181,.85);
+      border-radius: 50%;
+      color: #fff;
+      display: inline-block;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      width: 30px;
+      font-size: 12px;
+    }
+    
+    a {
+      color: #707070;
+    }
+    
+    .btn-toggle-sidebar {
+      position: fixed;
+      top: 10px;
+      left: 80px;
+      z-index: 1001;
+      background-color: #860624;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: left 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    
+    .btn-toggle-sidebar.expanded {
+      left: 270px;
+    }
+    
+    @media (max-width: 768px) {
+      #contenue p {
+        display: flex;
+        flex-direction: column;
+      }
+      #contenue p button {
+        display: block;
+        margin-top: 4px;
+        font-size: 0.85em;
+        padding: 6px 10px;
+        width: fit-content;
+      }
+
+      .mobile-toggle-btn {
+        display: none;
+        z-index: 1001;
+      }
+      
+      .sidebar {
+        width: 0; 
+      }
+
+
+      .sidebar.expanded {
+        width: 280px; 
+      }
+      
+      body {
+        padding-left: 0;
+      }
+      
+      body.sidebar-expanded {
+        padding-left: 260px; 
+      }
+    }
+    .mobile-toggle-btn {
+      position: fixed;
+      top: 400px;
+      left: 10px;
+      background-color: #860624;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      font-size: 22px;
+      transition: left 0.3s ease;
+    }
+    
+
+      .menu-item.active {
+      background-color: rgba(134, 6, 36, 0.7);
+    }
+
+
+
+
+

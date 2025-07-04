@@ -1,6 +1,6 @@
 <div class="auth-container">
     <div class="auth-card">
-        <!-- Section QR Code -->
+       
         <div class="qr-section" *ngIf="qrData">
             <h2 class="section-title">Authentification à Deux Facteurs</h2>
             <div class="qr-wrapper">
@@ -12,7 +12,7 @@
             <p>Aucune donnée QR code trouvée. Veuillez contacter le support.</p>
         </div>
 
-        <!-- Section de saisie TOTP -->
+     
         <div class="totp-section">
             <h3 class="input-title">Code de Vérification</h3>
             <p class="instruction-text">Entrez le code à 6 chiffres de votre application d'authentification</p>
@@ -93,15 +93,14 @@
                     />
                 </div>
 
-                <!-- Ligne d'action -->
                 <div class="action-row">
-                    <button type="submit" [disabled]="totpForm.invalid" class="verify-button">
+                    <button type="submit" [disabled]="totpForm.invalid" class="verify-button" (click)="saveReferrer()">
                         Vérifier le Code
                     </button>
                 </div>
             </form>
             
-            <!-- Message de résultat de vérification -->
+
             <div *ngIf="verificationResult" 
                  [ngClass]="{'success-message': verificationSuccess, 'error-message': !verificationSuccess}"
                  class="result-message">

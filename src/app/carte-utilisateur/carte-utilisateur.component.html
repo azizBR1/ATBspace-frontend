@@ -1,0 +1,952 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  
+
+    
+        <style>
+
+          
+          body.sidebar-expanded {
+            padding-left: 260px;
+          }
+          
+     
+          .sidebar {
+            background: linear-gradient(to bottom, #000000, #5e5e5e);
+            width: 70px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transition: width 0.3s ease;
+            overflow: hidden;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+          }
+          
+          .sidebar:hover {
+            width: 260px;
+          }
+          
+          .sidebar-header {
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+          }
+          
+          .sidebar-logo {
+            width: 55px;
+            height: 55px;
+            margin-right: 15px;
+          }
+          
+          .sidebar-title {
+            white-space: nowrap;
+            line-height: 0.8;
+          }
+          
+          .admin-text {
+            font-size: 28px;
+            color: rgb(189, 189, 189);
+          }
+          
+          .space-text {
+            font-size: 20px;
+            color: white;
+          }
+          
+          .sidebar-menu {
+            list-style: none;
+            padding: 0;
+          }
+          
+          .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+          }
+          
+          .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+          }
+          
+          .menu-item i {
+            font-size: 20px;
+            min-width: 30px;
+            margin-left: 5px;
+      
+          }
+          
+          .menu-item span {
+            margin-left: 15px;
+            white-space: nowrap;
+          }
+          
+          .logout {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+          }
+          
+          /* Existing page styles */
+          .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 990;
+          }
+          
+          .container {
+            margin-top: 20px;
+          }
+          
+          .card {
+            border: none;
+            -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+            margin-bottom: 30px;
+            background: white;
+          }
+          
+          .w-60 {
+            width: 60px;
+          }
+          
+          h1, h2, h3, h4, h5, h6 {
+            margin: 0 0 10px;
+            font-weight: 600;
+          }
+          
+          .social-links li a {
+            -webkit-border-radius: 50%;
+            background-color: rgba(89,206,181,.85);
+            border-radius: 50%;
+            color: #fff;
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            width: 30px;
+            font-size: 12px;
+          }
+          
+          a {
+            color: #707070;
+          }
+          
+          .btn-toggle-sidebar {
+            position: fixed;
+            top: 10px;
+            left: 80px;
+            z-index: 1001;
+            background-color: #860624;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: left 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+          }
+          
+          .btn-toggle-sidebar.expanded {
+            left: 270px;
+          }
+      
+      
+          @media (max-width: 768px) {
+            .mobile-toggle-btn {
+              display: none;
+          }
+          
+          .sidebar {
+            width: 0; 
+          }
+          
+          .sidebar.expanded {
+            width: 260px;
+          }
+          
+          body {
+            padding-left: 0; 
+          }
+          
+          body.sidebar-expanded {
+            padding-left: 260px;
+          }
+        }
+      
+       
+      .mobile-toggle-btn {
+        position: fixed;
+        top: 400px;
+        left: 10px;
+        background-color: #860624;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        font-size: 22px;
+        transition: left 0.3s ease;
+        z-index: 999;
+      }
+ 
+      
+      .menu-item.active {
+      background-color: rgba(134, 6, 36, 0.7);
+    }
+      
+  .gradient-text {
+    background: linear-gradient(to right, #8ceaff, #006163);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+  }
+  
+  .gradient-text2 {
+    background: linear-gradient(to right, #cf8000, #ffbf00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+  }
+        </style>
+      </head>
+      <body>
+        <div class="sidebar" id="mySidebar">
+          <div class="sidebar-header">
+            <a href="http://localhost:4200/#/espace-utilisateur" >
+            <img src="assets/logo atb.png"alt="Logo" class="sidebar-logo">
+          </a>
+            <h3 class="sidebar-title">
+              <b>
+                <span class="admin-text">User</span><br>
+                <span class="space-text">Space</span>
+              </b>
+            </h3>
+          </div>
+          <nav class="sidebar-menu">
+            <a href="http://localhost:4200/#/file-utilisateur" class="menu-item">
+                <i class="bi bi-sort-numeric-up"></i>
+              <span>File D'attente</span>
+            </a>
+            <a href="http://localhost:4200/#/credit-utilisateur" class="menu-item">
+                <i class="bi bi-file-earmark-text"></i>
+              <span>Crédit Bancaire</span>
+            </a>
+            <a href="http://localhost:4200/#/Carte-utilisateur"   class="menu-item active" >
+                <i class="bi bi-credit-card-2-back"></i>
+              <span>Demande Carte Bancaire</span>
+            </a>
+            <a href="http://localhost:4200/#/currency-utilisateur"  class="menu-item">
+              <i class="bi bi-currency-exchange"></i>
+            <span>Cours de Change</span>
+          </a>
+            
+            <a href="http://localhost:4200/#/reclamation-utilisateur"  class="menu-item">
+                <i class="bi bi-exclamation-octagon"></i>
+              <span>Réclamation</span>
+            </a>
+             <a href="http://localhost:4200/#/parametre-utilisateur"  class="menu-item">
+                <i class="bi bi-gear"></i>
+              <span>Parametres</span>
+            </a>
+
+            <a href="http://localhost:4200/#/" class="menu-item logout"> 
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Déconnexion</span>
+            </a>
+          </nav>
+        </div>
+        <button id="mobileSidebarToggle"  class="mobile-toggle-btn" (click)="toggleSidebar()">
+          <i class="bi bi-arrow-bar-right"></i>
+        </button>
+
+<p class="historique-demande" style="cursor:pointer;" *ngIf="histodmd" (click)="divhistodmd()">
+  <i class="bi bi-list"></i> Demande en cours
+</p>
+
+
+<div class="dmdhistorique" *ngIf="visiblehisto">
+  <div *ngIf="dmds">
+    <h2>Votre demande</h2>
+    <p>Type: {{ dmds.type }}</p>
+    <p>Statut: {{ dmds.statut }}</p>
+    <p>Code: {{ dmds.code }}</p>
+    <p>Date: {{ dmds.date }}</p>
+    <p *ngIf="dmds.statut === 'ACCEPTEE'">Document : <a href="https://www.atb.tn/doc/Demande-relative-a-la-carte-bancaire.pdf" target="_blank" style="color: #930c2c;">Télécharger le formulaire</a></p>
+  </div>
+</div>
+
+<i 
+  *ngIf="showCursor" 
+  class="bi bi-hand-index-thumb animated-cursor"
+></i>
+
+
+
+<div class="overlay" *ngIf="visibleDetail === 1" (click)="closeDetails()">
+  <div class="card-details show" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.4;" (click)="$event.stopPropagation()">
+    
+ <h4><span style="color:#930c2c; font-weight: bold;">Carte ATB Visa Electron Débit :</span></h4>
+  <p> retrait et paiement simples, rapides et sécurisés.</p>
+  <p><span style="color: #930c2c; font-weight: bold;">Eligibilité :</span> toute personne physique résidente en Tunisie, usage uniquement sur le territoire tunisien.</p>
+  <p><span style="color: #930c2c; font-weight: bold;">Avantages :</span></p>
+  <ul style="margin: 0.5em 0 1em 20px; padding: 0;">
+    <li><span style="color: #930c2c; font-weight: bold;">Assurance-protection</span> contre la perte et le vol de la carte</li>
+    <li><span style="color: #930c2c; font-weight: bold;">Moyen de paiement sûr</span></li>
+    <li><span style="color: #930c2c; font-weight: bold;">Accès à ATB NET/ATB Mobile</span> pour suivre vos transactions</li>
+  </ul>
+  <p><span style="color: #930c2c; font-weight: bold;">Services :</span></p>
+  <ul style="margin: 0.5em 0 0 20px; padding: 0;">
+    <li>Retraits d’argent 24h/24, 7j/7</li>
+    <li>Paiement chez les commerçants affiliés</li>
+    <li>Règlement des achats et factures en ligne</li>
+    <li>Consultation du solde via GAB</li>
+  </ul>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="overlay" *ngIf="visibleDetail === 2" (click)="closeDetails()" style="max-height: 100vh; overflow-y: auto;">
+  <div class="card-details show" (click)="$event.stopPropagation()">
+<h4><span style="color:#fffcda; font-weight: bold;">E-pay :</span></h4>
+<p>Carte de débit <strong style="color:#fffcda;">100% virtuelle</strong>, conçue pour des paiements en ligne rapides et sécurisés.</p>
+
+<p><span style="color:#fffcda; font-weight: bold;">Avantages :</span></p>
+<ul style="margin: 0.5em 0 1em 20px; padding: 0;">
+  <li><strong style="color:#fffcda;">Aucune carte physique</strong> : zéro risque de perte.</li>
+  <li>Idéale pour achats en ligne et accessible via ATBNET.</li>
+  <li>Inscription possible à <strong style="color:#fffcda;">ATB PAY</strong> pour paiement mobile et transferts Wallet à Wallet.</li>
+  <li><strong style="color:#fffcda;">Création instantanée</strong> pour clients abonnés ATB NET.</li>
+</ul>
+
+<p><span style="color:#fffcda; font-weight: bold;">Fonctionnalités clés :</span></p>
+<ul style="margin: 0.5em 0 1em 20px; padding: 0;">
+  <li><strong style="color:#fffcda;">Sécurité renforcée</strong> avec numéro, date d'expiration et CVV2 reçu par SMS.</li>
+  <li><strong style="color:#fffcda;">Plafond mensuel :</strong> 2 000 DT, fonction du solde compte.</li>
+  <li><strong style="color:#fffcda;">Assurance contre la fraude</strong> incluse.</li>
+</ul>
+
+<p><span style="color:#fffcda; font-weight: bold;">Obtention :</span></p>
+<ul style="margin: 0.5em 0 1em 20px; padding: 0;">
+  <li>Demande en agence ATB avec contrat et abonnement ATBNET.</li>
+  <li>Validation par chargé clientèle et directeur d’agence.</li>
+  <li>Accès instantané au numéro et validité sur ATB NET.</li>
+  <li>Réception du code CVV2 par SMS après activation.</li>
+</ul>
+
+<p><span style="color:#fffcda; font-weight: bold;">Utilisations pratiques :</span></p>
+<ul style="margin: 0.5em 0 0 20px; padding: 0;">
+  <li>Achats en ligne sécurisés.</li>
+  <li>Utilisation sur ATB PAY et alimentation de Wallet.</li>
+</ul>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="overlay" *ngIf="visibleDetail === 3" (click)="closeDetails()">
+  <div class="card-details show" (click)="$event.stopPropagation()">
+ <h4><span style="color:#0c0e93; font-weight: bold;">Visa Classique Nationale :</span></h4>
+    <p>Carte bancaire accessible à toute personne majeure titulaire d’un compte ATB en dinars.</p>
+
+    <p><span style="color:#0c0e93; font-weight: bold;">Avantages :</span></p>
+    <ul style="margin: 0.5em 0 1em 20px; padding: 0;">
+      <li>Opérations <strong style="color:#0c0e93;">sécurisées</strong> : paiements sur TPE, Internet et retraits GAB.</li>
+      <li>Frais de mise en opposition à l’étranger <strong style="color:#0c0e93;">remboursés</strong> (version internationale).</li>
+      <li><strong style="color:#0c0e93;">Suivi en ligne</strong> avec ATBNET/ATB Mobile.</li>
+    </ul>
+
+    <p><span style="color:#0c0e93; font-weight: bold;">Services associés :</span></p>
+    <ul style="margin: 0.5em 0 0 20px; padding: 0;">
+      <li>Paiements dans les établissements acceptant les cartes bancaires.</li>
+      <li>Paiements sur TPE et sites Internet.</li>
+      <li>Retraits sur tous les GAB.</li>
+      <li>Services GAB ATB : retrait, consultation des soldes, mini-relevé, dernières opérations, recharge téléphone, demande de chéquier.</li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+<div class="overlay" *ngIf="visibleDetail === 4" (click)="closeDetails()" style="max-height: 100vh; overflow-y: auto;">
+  <div class="card-details show" (click)="$event.stopPropagation()">
+    <h4><span style="color:#b3b3b3; font-weight: bold;">Carte Technologique Internationale :</span></h4>
+    <p>Permet d’effectuer des paiements en devises sur Internet pour l’hébergement, la publicité, les abonnements, la formation en ligne, les outils de développement et les licences logicielles.</p>
+
+    <p><span style="color:#b3b3b3; font-weight: bold;">Avantages :</span></p>
+    <ul style="margin: 0.5em 0 1em 20px; padding: 0;">
+      <li>Paiement des <strong style="color:#b3b3b3;">hébergements de sites web ou d'applications mobiles</strong>.</li>
+      <li><strong style="color:#b3b3b3;">Publicités et abonnements</strong> sur plateformes éducatives et de sous-traitance.</li>
+      <li>Collecte d’informations à caractère éducatif ou professionnel.</li>
+      <li>Accès à des <strong style="color:#b3b3b3;">services de formation en ligne</strong>.</li>
+      <li>Achat d’<strong style="color:#b3b3b3;">outils de développement</strong> et de <strong style="color:#b3b3b3;">licences logicielles</strong>.</li>
+      <li><strong style="color:#b3b3b3;">Plafonds :</strong> 1 000 DT pour les particuliers, 10 000 DT pour les entreprises.</li>
+    </ul>
+
+    <p><span style="color:#b3b3b3; font-weight: bold;">Pour qui ?</span></p>
+    <ul style="margin: 0.5em 0 1em 20px; padding: 0;">
+      <li><strong style="color:#b3b3b3;">Entreprises</strong> résidentes dans les secteurs IT, télécoms, éducation, conseil, etc.</li>
+      <li><strong style="color:#b3b3b3;">Particuliers</strong> résidents avec un diplôme au moins équivalent au baccalauréat.</li>
+      <li>Ouverture d’un <strong style="color:#b3b3b3;">compte spécifique</strong> chez ATB requise, même pour les non-clients.</li>
+    </ul>
+
+    <p><span style="color:#b3b3b3; font-weight: bold;">Documents nécessaires :</span></p>
+    <p style="margin-bottom: 0.3em;"><strong style="color:#b3b3b3;">Particuliers :</strong></p>
+    <ul style="margin: 0 0 1em 20px; padding: 0;">
+      <li>Copie certifiée d’un diplôme ≥ baccalauréat.</li>
+      <li>Copie de la Carte d’Identité Nationale.</li>
+    </ul>
+    <p style="margin-bottom: 0.3em;"><strong style="color:#b3b3b3;">Entreprises :</strong></p>
+    <ul style="margin: 0 0 0 20px; padding: 0;">
+      <li>Copie de l’extrait du registre de commerce.</li>
+      <li>Statuts de la société.</li>
+      <li>Attestation de dépôt auprès de l’APII ou structure habilitée.</li>
+    </ul>
+
+  </div>
+</div>
+
+
+
+<div class="overlay" *ngIf="visibleDetail === 5" (click)="closeDetails()">
+  <div class="card-details show" (click)="$event.stopPropagation()">
+        <h4><span style="color:#e22249; font-weight: bold;">Carte Lella :</span></h4>
+    <p>Outre les avantages pratiques des cartes bancaires (paiement et retrait 24h/24 et 7j/7 partout en Tunisie), la carte Lella offre des fonctionnalités spécifiques pensées pour plus de confort au quotidien.</p>
+
+    <p><span style="color:#e22249; font-weight: bold;">Avantages :</span></p>
+    <ul style="margin: 0.5em 0 1em 20px; padding: 0;">
+      <li>Achats et retraits sans souci : <strong style="color:#e22249;">le débit n’est effectué qu’en fin de mois</strong>.</li>
+      <li><strong style="color:#e22249;">Suivi de budget facilité</strong> grâce au relevé détaillé des dépenses liées à la carte.</li>
+    </ul>
+
+    <p><span style="color:#e22249; font-weight: bold;">Services associés :</span></p>
+    <ul style="margin: 0 0 1em 20px; padding: 0;">
+      <li><strong style="color:#e22249;">Assurance-protection</strong> des moyens de paiement contre la perte ou le vol.</li>
+      <li><strong style="color:#e22249;">Suivi en ligne</strong> des transactions via <a href="https://www.atbnet.tn" target="_blank" style="color:#e22249; text-decoration: underline;">ATBNET</a>.</li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="overlay" *ngIf="visibleDetail === 6" (click)="closeDetails()">
+  <div class="card-details show" (click)="$event.stopPropagation()">
+    <h4><span style="color:#e2b822; font-weight: bold;">Carte El Khir :</span></h4>
+    <p>L’ATB met à votre disposition la carte <strong style="color:#e2b822;">El Khir</strong>, une carte qui vous simplifie l’épargne.</p>
+    <p>Fonctionnant sur votre <strong>compte épargne</strong>, elle vous offre les avantages de l’épargne tout en vous apportant une plus grande liberté d’accès à vos fonds.</p>
+
+    <p><span style="color:#e2b822; font-weight: bold;">Avantages :</span></p>
+    <ul style="margin: 0.5em 0 1em 20px; padding: 0;">
+      <li><strong style="color:#e2b822;">Retrait 24h/24 et 7j/7</strong> sur l’ensemble des GABs* en Tunisie, tout en conservant les bénéfices de l’épargne.</li>
+      <li><strong style="color:#e2b822;">Suivi à distance</strong> de votre compte via le service en ligne ATB Net.</li>
+      <li><strong style="color:#e2b822;">Relevé trimestriel</strong> envoyé à votre domicile avec les dernières opérations de votre Compte Épargne.</li>
+    </ul>
+
+    <p><span style="color:#e2b822; font-weight: bold;">Mesures de sécurité :</span></p>
+    <p>En raison de l’augmentation des fraudes, et compte tenu du lien direct entre la carte El Khir et votre compte épargne, l’ATB a instauré des limites d’utilisation :</p>
+    <ul style="margin: 0 0 1em 20px; padding: 0;">
+      <li><strong style="color:#e2b822;">Nombre maximum de retraits</strong> : 6 opérations par jour</li>
+      <li><strong style="color:#e2b822;">Montant maximum de retraits</strong> : 2000 DT par jour</li>
+      <li>*Retrait auprès d'autres banques : <strong>frais de 1 DT</strong> par opération (tarif d’octobre 2007)</li>
+    </ul>
+       
+  </div>
+</div>
+
+<div class="overlay" *ngIf="visibleDetail === 12" (click)="closeDetails()">
+  <div class="card-details show" (click)="$event.stopPropagation()">
+<h4><span class="gradient-text">Carte Mastercard Nationale & Internationale</span></h4>
+
+<p>Ces cartes constituent le <strong class="gradient-text">complément indispensable de votre compte chèques</strong>.</p>
+
+<p><span class="gradient-text">En version nationale :</span></p>
+<ul style="margin-left: 20px;">
+  <li>Effectuez vos opérations de <strong>paiement</strong> et <strong>retrait</strong> 7j/7 et 24h/24 en Tunisie.</li>
+  <li>Profitez d’un <strong class="gradient-text">plafond hebdomadaire personnalisé</strong> pour mieux gérer vos finances.</li>
+  <li>Bénéficiez de la <strong class="gradient-text">protection ATB Protect</strong> contre la perte ou le vol.</li>
+</ul>
+
+<p><span class="gradient-text">En version internationale :</span></p>
+<ul style="margin-left: 20px;">
+  <li>Votre compte vous accompagne à l’étranger grâce au réseau mondial <strong class="gradient-text">Mastercard</strong>.</li>
+  <li>Retirez de l’argent et effectuez vos paiements chez plus de <strong>30 millions de commerçants</strong> et prestataires de services affichant le logo Mastercard.</li>
+  <li>Inclus : <strong class="gradient-text">ATB Protect</strong> pour sécuriser vos moyens de paiement.</li>
+</ul>
+  </div>
+</div>
+
+
+<div class="overlay" *ngIf="visibleDetail === 7" (click)="closeDetails()">
+  <div class="card-details show" (click)="$event.stopPropagation()">
+    <h4><span class="gradient-text2">C’pour qui ?</span></h4>
+
+<p>Toute personne physique âgée de <strong class="gradient-text2">13 à 25 ans</strong> peut bénéficier de ce service.</p>
+
+<p><span class="gradient-text2">Deux versions</span> de la carte ATB C’jeune sont disponibles :</p>
+<ul style="margin-left: 20px;">
+  <li><strong class="gradient-text2">ATB C’jeune</strong> : pour ceux dont l’âge est compris entre <strong>13 et 18 ans</strong>. La carte est adossée au compte des parents.</li>
+  <li><strong class="gradient-text2">ATB C’jeune plus</strong> : pour ceux dont l’âge est compris entre <strong>18 et 25 ans</strong>. 
+    La carte fonctionne sur le compte chèque des parents pour les 18-20 ans ou sur un compte chèque personnel pour les plus de 20 ans.
+  </li>
+</ul>
+
+<h4><span class="gradient-text2">Obtenir la carte C’jeune</span></h4>
+
+<p><strong>Et bien rien de plus simple :</strong></p>
+
+<p>Si vous avez entre <strong class="gradient-text2">13 et 20 ans</strong>, l’autorisation de votre parent ou représentant légal est nécessaire dans tous les cas. 
+Ce dernier devra vous accompagner à l’agence ATB pour remplir le formulaire de demande de carte et le signer. 
+Et si vous avez <strong>16 ans et plus</strong>, il peut même vous autoriser à posséder un <strong class="gradient-text2">compte Jeune</strong>.</p>
+
+<p>Si vous avez entre <strong class="gradient-text2">20 et 25 ans</strong>, votre carte peut soit être adossée au compte de votre parent, auquel cas ce dernier doit signer le formulaire de demande de carte, 
+soit vous ouvrez un <strong class="gradient-text2">compte Jeune sans frais</strong> et accomplissez par vous-même les formalités.</p>
+       
+  </div>
+</div>
+
+
+
+
+<div class="overlay" *ngIf="visibleDetail === 8" (click)="closeDetails()">
+  <div class="card-details show" (click)="$event.stopPropagation()">
+    <h4><span style="color:#e7b606; font-weight: bold;">ATB Visa GOLD</span></h4>
+
+<p>L’<strong>Arab Tunisian Bank</strong> propose à toute personne physique résidente, titulaire d’un compte ATB, la carte haut de gamme <strong style="color:#e7b606;">ATB Visa GOLD</strong>, conçue pour satisfaire les besoins de ses clients les plus exigeants.</p>
+
+<p>Cette carte vous permet de régler facilement vos achats chez tous les commerçants affiliés au réseau Visa, de retirer des espèces à tout moment, 24h/24 et 7j/7, et d’effectuer vos paiements en ligne, en toute sécurité, grâce à des plafonds adaptés à vos besoins.</p>
+
+<p><span style="color:#e7b606; font-weight: bold;">Avantages :</span></p>
+<ul style="margin-left: 20px;">
+  <li><strong style="color:#e7b606;">Assurance et assistance à l’étranger</strong> : couverture gratuite pour vous et votre famille pendant vos déplacements.</li>
+  <li><strong style="color:#e7b606;">Avance de fonds</strong> : jusqu’à 2000 USD en espèces, et jusqu’à 2500 USD en cas d’hospitalisation.</li>
+  <li><strong style="color:#e7b606;">Double protection</strong> : une assistance exclusive Visa Gold + la couverture <strong>ATB Protect</strong>.</li>
+</ul>
+
+<p><span style="color:#e7b606; font-weight: bold;">Services associés :</span></p>
+<ul style="margin-left: 20px;">
+  <li>Paiement chez les commerçants acceptant les cartes Visa.</li>
+  <li>Retraits d’espèces sur les GAB de l’ATB et ceux des autres banques tunisiennes.</li>
+  <li>Services pratiques sur les GAB ATB : consultation du solde carte/compte, mini relevé, recharge téléphonique, demande de chéquier, etc.</li>
+  <li>Utilisation à l’étranger (si carte internationale) : paiements et retraits en toute simplicité.</li>
+  <li>Suivi des opérations via <strong>ATB NET</strong> ou <strong>ATB Mobile</strong>.</li>
+</ul>
+
+
+       
+  </div>
+</div>
+
+
+
+
+<div class="overlay" *ngIf="visibleDetail === 9" (click)="closeDetails()">
+  <div class="card-details show" (click)="$event.stopPropagation()">
+    <h4><span style="color:#709967; font-weight: bold;">Carte American Express</span></h4>
+
+<p><strong style="color:#709967;">Fonctionnement :</strong></p>
+
+<p><strong style="color:#709967;">Avec la Carte Amex Gold :</strong></p>
+<ul style="margin-left: 20px;">
+  <li>Retrait d’espèces limité à un total de <strong>2 000 USD</strong> tous les 30 jours.</li>
+  <li>Plafond mensuel minimum de <strong>7 000 USD</strong>.</li>
+  <li>Avance de fonds d’urgence contre chèque : jusqu’à <strong>5 000 USD</strong> tous les 21 jours (dont 500 USD en espèces et 4 500 USD en chèques de voyage).</li>
+</ul>
+
+<p><strong style="color:#709967;">Avec la Carte Amex Green :</strong></p>
+<ul style="margin-left: 20px;">
+  <li>Retrait d’espèces limité à <strong>1 000 USD</strong> tous les 30 jours.</li>
+  <li>Plafond mensuel minimum de <strong>3 000 USD</strong>.</li>
+  <li>Avance de fonds d’urgence contre chèque : jusqu’à <strong>1 000 USD</strong> tous les 21 jours (dont 200 USD en espèces et 800 USD en chèques de voyage).</li>
+</ul>
+
+<p><strong style="color:#709967;">Privilèges et fidélité :</strong></p>
+
+<ul style="margin-left: 20px;">
+  <li>Offres exclusives sur des compagnies aériennes, comme les billets gratuits pour un compagnon et les surclassements.</li>
+  <li>Accès gratuit aux salons d’aéroports dans tout le Moyen-Orient.</li>
+  <li>Assurance accident de voyage et couverture contre les désagréments (vol retardé, embarquement refusé, retard ou perte de bagages).</li>
+  <li>Service exclusif de réservation garantissant la disponibilité de votre chambre d’hôtel, quel que soit votre retard.</li>
+</ul>
+  </div>
+</div>
+
+
+
+
+<div class="overlay" *ngIf="visibleDetail === 10" (click)="closeDetails()">
+  <div class="card-details show" (click)="$event.stopPropagation()">
+<h4><span style="color:#b4b4b4; font-weight: bold;">Carte MasterCard World</span></h4>
+
+<p><strong style="color:#b4b4b4;">Usage :</strong></p>
+<ul style="margin-left: 20px;">
+  <li>Retraits et paiements au réseau ATB & banques tunisiennes (plafond hebdo).</li>
+  <li>Règlement chez les commerçants affiliés en Tunisie.</li>
+  <li>Paiements sécurisés en ligne.</li>
+</ul>
+
+<p><strong style="color:#b4b4b4;">Privilèges “Travel-Carefree” :</strong></p>
+<ul style="margin-left: 20px;">
+  <li>Accès illimité aux salons d’aéroport (porteur + 1 invité).</li>
+  <li>Meet & Greet et conciergerie voyage 24/7.</li>
+  <li>Abonnements premium (hôtels, compagnies aériennes, voitures).</li>
+</ul>
+
+<p><strong style="color:#b4b4b4;">Privilèges “Always-at-Your-Service” :</strong></p>
+<ul style="margin-left: 20px;">
+  <li>Conciergerie World Elite™.</li>
+  <li>Shopping villages & limousine Careem.</li>
+  <li>Offres MyUS Shipping & Priceless Cities.</li>
+</ul>
+
+<p><strong style="color:#b4b4b4;">Privilèges “Reassuring” :</strong></p>
+<ul style="margin-left: 20px;">
+  <li>Assurances voyage complètes (médicale, bagages, collision).</li>
+  <li>Protection vol & agression après retrait.</li>
+  <li>Service de déclaration en ligne simplifié.</li>
+</ul>
+
+       
+  </div>
+</div>
+
+
+<div class="overlay" *ngIf="visibleDetail === 11" (click)="closeDetails()" style="max-height: 100vh; overflow-y: auto;">
+  <div class="card-details show" (click)="$event.stopPropagation()">
+<h4><span style="color:#b4b4b4; font-weight: bold;">Carte Moussafer Platinum</span></h4>
+
+<p><strong style="color:#b4b4b4;">Pour qui :</strong></p>
+<ul style="margin-left: 20px;">
+  <li>Toute personne résidente en Tunisie bénéficiant d’une allocation touristique.</li>
+</ul>
+
+<p><strong style="color:#b4b4b4;">Comment l’obtenir :</strong></p>
+<ul style="margin-left: 20px;">
+  <li>Demande simple auprès de votre agence ATB.</li>
+</ul>
+
+<p><strong style="color:#b4b4b4;">Fonctionnalités clés :</strong></p>
+<ul style="margin-left: 20px;">
+  <li>Accès à votre allocation sur une carte moderne pour paiements et retraits à l’étranger.</li>
+  <li>Réservations hôtelières et voitures en ligne depuis la Tunisie.</li>
+  <li>Encaissement de détaxe soit sur la carte, soit en espèces.</li>
+  <li>Suivi des transactions via ATB NET.</li>
+  <li>Assurance et assistance voyage offertes gratuitement.</li>
+</ul>
+
+<p><strong style="color:#b4b4b4;">Avantages et réductions :</strong></p>
+<ul style="margin-left: 20px;">
+  <li>Assurance voyage & visa Schengen (couverture jusqu’à 50 000 $).</li>
+  <li>Jusqu’à 30 % de remise sur hôtels & vols sur Cleartrip.</li>
+  <li>15 % de réduction dans les villages Chic Outlet Shopping.</li>
+  <li>Accès gratuit à 25 salons d’aéroport.</li>
+  <li>20 % de remise sur trajets Careem (Moyen-Orient & Afrique du Nord).</li>
+  <li>15 % de remise et surclassement possible sur locations de voiture (Avis).</li>
+  <li>Accès aux offres Priceless Cities et Buy 1 Get 1 gratuites.</li>
+</ul>
+
+<p><strong style="color:#b4b4b4;">En résumé :</strong></p>
+<ul style="margin-left: 20px;">
+  <li>Gestion sécurisée de votre allocation touristique.</li>
+  <li>Réductions exclusives sur voyages, hôtels, shopping et transports.</li>
+  <li>Assurance et assistance voyage complètes.</li>
+  <li>Suivi en ligne et encaissement de détaxe simplifiés.</li>
+</ul>
+
+       
+  </div>
+</div>
+
+
+
+
+<div *ngIf="divConfirmation" class="confirmation-overlay">
+  <div class="confirmation-box">
+    <i class="bi bi-exclamation-triangle"></i>
+    <p>Voulez-vous vraiment demander la carte <strong>{{ selecType }}</strong> ?</p>
+    <p>La soumission d’une demande de carte de crédit ne constitue en aucun cas une garantie d’éligibilité. En cas de non-éligibilité, une notification vous sera adressée par courrier électronique.Si votre demande est acceptée, vous aurez la possibilité d’imprimer le formulaire, de le remplir avec les informations requises, puis de l’envoyer à l’adresse<span style="color: #c20000;"> atbcreditcard&#64;gmail.com</span> ou de le déposer directement dans votre agence, afin qu’il soit traité dans les plus brefs délais.</p>
+    <button (click)="confirmDemande()" class="btn-confirm">Oui</button>
+    <button (click)="cancelDemande()" class="btn-cancel">Non</button>
+  </div>
+</div>
+
+<div class="trois-card-container">
+    <div class="card-container">
+     
+
+      <div class="card"  id="card5" style="padding: -10; margin-left: 100px;  background: linear-gradient(to right, #930c2c, #48001b);">
+        <h3 style="position: fixed; z-index: 0; padding: 30px; color: white;">ATB Visa Electron</h3>
+        <p style="position: fixed; z-index: 0; padding: 30px; color: white; margin-top: 45px;">simple, rapide et pratique</p>
+        <div class="card-inner">
+        <img class="fg-img" [class.active]="cursor" src="assets\visa_electron.png" alt="Fond de carte" style=" transform: rotate(21.8deg); margin-top: -67px; margin-left: -118px; width: 627px; height: auto;">
+        </div>
+        <div class="card-buttons">
+        <button class="btndetails" (click)="affichedetail(1)" ><i class="bi bi-info-circle" ></i> Détails</button>
+        <button class="btndemande" (click)="Confirmation('ATB_Visa_Electron')"><i class="bi bi-box-arrow-in-down"></i> Demander</button>
+        </div>
+     
+    </div>
+</div>
+
+
+
+
+  <div class="card-container">
+      
+
+      <div class="card"  id="card5" style="padding: -10; margin-left: 100px;  background: linear-gradient(to right, #ffffffac, #fffcda);">
+        <h3 class="cartedescription">Carte Virtuelle E-pay</h3>
+        <p class="cartedescription2">votre Solution de Paiement en Ligne Sécurisée</p>
+        <div class="card-inner">
+        <img  class="fg-img" src="assets\carte_e_pay.png" alt="Fond de carte" style=" transform: rotate(21.8deg); margin-top: -67px; margin-left: -116px; width: 625px; height: auto;">
+        </div>
+         <div class="card-buttons">
+        <button class="btndetails" (click)="affichedetail(2)" ><i class="bi bi-info-circle" ></i> Détails</button>
+        <button class="btndemande" (click)="Confirmation('Carte_E_pay')"><i class="bi bi-box-arrow-in-down"></i> Demander</button>
+        </div>
+      </div>
+
+</div>
+
+<div class="card-container">
+      
+
+      <div class="card"  id="card5" style="padding: -10; margin-left: 100px;  background: linear-gradient(to right, #0c0e93, #001248);">
+        <h3 style="position: fixed; z-index: 0; padding-left: 30px;padding-top: 30px; color: white;">ATB VISA Classique Nationale</h3>
+        <p style="position: fixed; z-index: 0; padding: 30px; color: white; margin-top: 45px;">la sérénité au quotidien</p>
+        <div class="card-inner">
+        <img class="fg-img" src="assets\carte_visa.png" alt="Fond de carte" style=" transform: rotate(21.2deg); margin-top: -75px; margin-left: -128px; width: 646px; height: auto;">
+        </div>
+         <div class="card-buttons">
+        <button class="btndetails" (click)="affichedetail(3)" ><i class="bi bi-info-circle" ></i> Détails</button>
+        <button class="btndemande" (click)="Confirmation('ATB_VISA_Classique_Nationale')"><i class="bi bi-box-arrow-in-down"></i> Demander</button>
+        </div>
+      </div>
+
+</div>
+</div>
+
+
+
+<div class="trois-card-container">
+<div class="card-container">
+       
+
+      <div class="card"  id="card5" style="padding: -10; margin-left: 100px;  background: linear-gradient(to right, #ffffff, #b3b3b3);">
+        <h3 style="position: fixed; z-index: 0; padding-left: 30px;padding-top: 30px; color: rgb(0, 0, 0);">Carte technologique ATB</h3>
+        <p style="position: fixed; z-index: 0; padding: 30px; color: rgb(0, 0, 0); margin-top: 45px;">Des transactions en devises via internet</p>
+        <div class="card-inner">
+        <img class="fg-img" src="assets\carte_tech.png" alt="Fond de carte" style=" transform: rotate(21.2deg); margin-top: -75px; margin-left: -134px; width: 665px; height: auto;">
+        </div>
+         <div class="card-buttons">
+        <button class="btndetails" (click)="affichedetail(4)" ><i class="bi bi-info-circle" ></i> Détails</button>
+        <button class="btndemande" (click)="Confirmation('Carte_technologique_ATB')"><i class="bi bi-box-arrow-in-down"></i> Demander</button>
+        </div>
+      </div>
+  
+</div>
+
+<div class="card-container">
+        
+
+      <div class="card"  id="card5" style="padding: -10; margin-left: 100px;  background: linear-gradient(to right, #ed516f, #e22249);">
+        <h3 style="position: fixed; z-index: 0; padding-left: 30px;padding-top: 30px; color: white;">Carte Lella</h3>
+        <p style="position: fixed; z-index: 0; padding: 30px; color: white; margin-top: 45px;">La sérénité au quotidien</p>
+        <div class="card-inner">
+        <img class="fg-img" src="assets\carte_lella.png" alt="Fond de carte" style=" transform: rotate(21deg); margin-top: -62px; margin-left: -108px; width: 610px; height: auto;">
+        </div>
+         <div class="card-buttons">
+        <button class="btndetails" (click)="affichedetail(5)" ><i class="bi bi-info-circle" ></i> Détails</button>
+        <button class="btndemande" (click)="Confirmation('Carte_Lella')"><i class="bi bi-box-arrow-in-down"></i> Demander</button>
+        </div>
+      </div>
+
+</div>
+        
+<div class="card-container">
+    
+
+      <div class="card"  id="card5" style="padding: -10; margin-left: 100px;  background: linear-gradient(to right, #edbc51, #e2b822);">
+        <h3 style="position: fixed; z-index: 0; padding-left: 30px;padding-top: 30px; color: rgb(0, 0, 0);">Carte El Khir</h3>
+        <p style="position: fixed; z-index: 0; padding: 30px; color: rgb(0, 0, 0); margin-top: 45px;">La carte qui vous simplifie l’épargne</p>
+        <div class="card-inner">
+        <img class="fg-img" src="assets\carte_elkhir.png" alt="Fond de carte" style=" transform: rotate(20.8deg); margin-top: -63px; margin-left: -107px; width: 610px; height: auto;">
+        </div>
+        <div class="card-buttons">
+        <button class="btndetails" (click)="affichedetail(6)" ><i class="bi bi-info-circle" ></i> Détails</button>
+        <button class="btndemande" (click)="Confirmation('Carte_El_Khir')"><i class="bi bi-box-arrow-in-down"></i> Demander</button>
+        </div>
+      </div>
+ 
+</div>
+</div>
+
+
+<div class="trois-card-container">
+<div class="card-container">
+        <h3 class="cartedescription" style="color: white;">ATB Mastercard</h3>
+        <p class="cartedescription2" style="color: white;">Le complément indispensable</p>
+      <div class="card"  id="card5" style="position: relative; padding: 10px; margin-left: 100px; overflow: hidden;">
+        <img class="bg-img" src="assets/bg-cartemaster.png" alt="Background" style="
+        position: absolute;
+        top: -100px;
+        left: -50px;
+        width: 500px;
+        height: auto;
+        transform: rotate(22deg);
+        filter:blur(6px) brightness(0.4);
+        z-index: 0;
+      ">
+      <div class="card-inner">
+        <img class="fg-img" src="assets\carte_master.png" alt="Fond de carte" style=" transform: rotate(22deg); margin-top: -83px; margin-left: -145px; width: 667px; height: auto;">
+        </div>
+         <div class="card-buttons">
+        <button class="btndetails" (click)="affichedetail(12)" ><i class="bi bi-info-circle" ></i> Détails</button>
+        <button class="btndemande" (click)="Confirmation('ATB_Mastercard')"><i class="bi bi-box-arrow-in-down"></i> Demander</button>
+        </div>
+      </div>
+ 
+</div>
+
+<div class="card-container">
+        <h3 class="cartedescription" style="color: white;">Carte C'Jeune</h3>
+        <p class="cartedescription2" style="color: white;">La première carte bancaire dédiée aux jeunes</p>
+
+      <div class="card"  id="card5" style="padding: -10; margin-left: 100px;">
+         <img class="bg-img" src="assets/bg-cartejeune.png" alt="Background" style="
+        position: absolute;
+        top: -100px;
+        left: -50px;
+        width: 500px;
+        height: auto;
+        transform: rotate(22deg);
+        filter:blur(6px) brightness(0.4);
+        z-index: 0;
+      ">
+      <div class="card-inner">
+        <img class="fg-img" src="assets\carte_jeune.png" alt="Fond de carte" style=" transform: rotate(20.5deg); margin-top: -87px; margin-left: -136px; width: 677px; height: auto;">
+        </div>
+
+         <div class="card-buttons">
+        <button class="btndetails" (click)="affichedetail(7)" ><i class="bi bi-info-circle" ></i> Détails</button>
+        <button class="btndemande" (click)="Confirmation('Carte_C_Jeune')"><i class="bi bi-box-arrow-in-down"></i> Demander</button>
+        </div>
+      </div>
+
+</div>
+
+<div class="card-container">
+
+
+      <div class="card"  id="card5" style="padding: -10; margin-left: 100px;  background: linear-gradient(to right, #e7b606, #edd651);">
+                <h3 style="position: fixed; z-index: 0; padding-left: 30px;padding-top: 30px; color: rgb(0, 0, 0);">ATB VISA GOLD</h3>
+        <p style="position: fixed; z-index: 0; padding: 30px; color: rgb(0, 0, 0); margin-top: 45px;">La carte de haut gamme pour un confort exceptionnel</p>
+        <div class="card-inner">
+        <img class="fg-img" src="assets\carte_gold.png" alt="Fond de carte" style=" transform: rotate(21.8deg); margin-top: -80px; margin-left: -130px; width: 660px; height: auto;">
+        </div>
+         <div class="card-buttons">
+        <button class="btndetails" (click)="affichedetail(8)" ><i class="bi bi-info-circle" ></i> Détails</button>
+        <button class="btndemande" (click)="Confirmation('ATB_VISA_GOLD')"><i class="bi bi-box-arrow-in-down"></i> Demander</button>
+        </div>
+      </div>
+
+</div>
+</div>
+
+
+<div class="trois-card-container">
+<div class="card-container">
+   
+
+      <div class="card"  id="card5" style="padding: -10; margin-left: 100px;  background: linear-gradient(to right, #9dba92, #709967);">
+        
+                        <h3 style="position: fixed; z-index: 0; padding-left: 30px;padding-top: 30px; color: rgb(0, 0, 0);">Carte American Express</h3>
+        <p style="position: fixed; z-index: 0; padding: 30px; color: rgb(0, 0, 0); margin-top: 45px;">La carte à la hauteur de votre quotidien</p>
+        <div class="card-inner">
+        <img class="fg-img" src="assets\carte_amex.png" alt="Fond de carte" style=" transform: rotate(22.1deg); margin-top: -80px; margin-left: -130px; width: 660px; height: auto;">
+        </div>
+         <div class="card-buttons">
+        <button class="btndetails" (click)="affichedetail(9)" ><i class="bi bi-info-circle" ></i> Détails</button>
+        <button class="btndemande" (click)="Confirmation('Carte_American_Express')"><i class="bi bi-box-arrow-in-down"></i> Demander</button>
+        </div>
+        
+      </div>
+
+</div>
+
+<div class="card-container">
+
+
+      <div class="card"  id="card5" style="padding: -10; margin-left: 100px;  background-color: #1e191a;">
+        
+                                <h3 style="position: fixed; z-index: 0; padding-left: 30px;padding-top: 30px; color: rgb(255, 255, 255);">Mastercard World</h3>
+        <p style="position: fixed; z-index: 0; padding: 30px; color: rgb(255, 255, 255); margin-top: 45px;">Un univers de privilèges</p>
+        <div class="card-inner">
+        <img class="fg-img" src="assets\carte_world.png" alt="Fond de carte" style="transform: rotate(21.6deg); margin-top: -77px; margin-left: -140px; width: 667px; height: auto;">
+        </div>
+         <div class="card-buttons">
+        <button class="btndetails" (click)="affichedetail(10)" ><i class="bi bi-info-circle" ></i> Détails</button>
+        <button class="btndemande" (click)="Confirmation('Mastercard_World')"><i class="bi bi-box-arrow-in-down"></i> Demander</button>
+        </div>
+    
+      </div>
+
+</div>
+<div class="card-container">
+
+
+      <div class="card"  id="card5" style="padding: -10; margin-left: 100px;  background:linear-gradient(to right,  #c7c7c7,  #dfdcdc);">
+                                <h3 style="position: fixed; z-index: 0; padding-left: 30px;padding-top: 30px; color: rgb(0, 0, 0);">Carte Moussafer Platinum</h3>
+        <p style="position: fixed; z-index: 0; padding: 30px; color: rgb(0, 0, 0); margin-top: 45px;">Votre allocation touristique sur une carte bancaire</p>
+        <div class="card-inner">
+        <img class="fg-img" src="assets\carte_mousefer.png" alt="Fond de carte" style=" transform: rotate(20.8deg); margin-top: -75px; margin-left: -129px; width: 658px; height: auto;">
+        </div>
+         <div class="card-buttons">
+        <button class="btndetails" (click)="affichedetail(11)" ><i class="bi bi-info-circle" ></i> Détails</button>
+        <button class="btndemande" (click)="Confirmation('Carte_Moussafer_Platinum')"><i class="bi bi-box-arrow-in-down"></i> Demander</button>
+        </div>
+      </div>
+
+</div>
+</div>
+
+

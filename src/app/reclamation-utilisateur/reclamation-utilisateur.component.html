@@ -171,22 +171,22 @@
       }
       
       .sidebar {
-        width: 0; /* Hide sidebar on mobile by default */
+        width: 0; 
       }
-      
+
+
       .sidebar.expanded {
-        width: 260px; /* Full width when expanded */
+        width: 280px; 
       }
       
       body {
-        padding-left: 0; /* Remove padding when sidebar is hidden */
+        padding-left: 0;
       }
       
       body.sidebar-expanded {
-        padding-left: 260px; /* Add padding when sidebar is expanded */
+        padding-left: 260px; 
       }
     }
-    
     .mobile-toggle-btn {
       position: fixed;
       top: 400px;
@@ -206,7 +206,7 @@
       transition: left 0.3s ease;
     }
     
-    /* Style pour la page de réclamation */
+
     html,body {
       font-family: 'Poppins', sans-serif;
       background-color: #1a1a1a;
@@ -311,7 +311,6 @@
   </style>
 </head>
 <body>
-  <!-- Sidebar exactement comme fournie -->
   <div class="sidebar" id="mySidebar">
     <div class="sidebar-header">
       <a href="http://localhost:4200/#/espace-utilisateur" >
@@ -321,25 +320,34 @@
         <b>
           <span class="admin-text">User</span><br>
           <span class="space-text">Space</span>
-        </b>
+        </b>  
       </h3>
     </div>
     <nav class="sidebar-menu">
-      <a href="dashboard.html" class="menu-item">
+      <a href="http://localhost:4200/#/file-utilisateur" class="menu-item">
         <i class="bi bi-sort-numeric-up"></i>
         <span>File D'attente</span>
       </a>
-      <a href="dashboard.html" class="menu-item">
+      <a href="http://localhost:4200/#/credit-utilisateur" class="menu-item">
         <i class="bi bi-file-earmark-text"></i>
-        <span>Documents Crédit Bancaire</span>
+        <span>Crédit Bancaire</span>
       </a>
-      <a href="parametres.html"  class="menu-item">
+      <a href="http://localhost:4200/#/Carte-utilisateur"  class="menu-item">
         <i class="bi bi-credit-card-2-back"></i>
         <span>Demande Carte Bancaire</span>
       </a>
+      <a href="http://localhost:4200/#/currency-utilisateur"  class="menu-item">
+        <i class="bi bi-currency-exchange"></i>
+      <span>Cours de Change</span>
+    </a>
       <a href="http://localhost:4200/#/reclamation-utilisateur"  class="menu-item active">
         <i class="bi bi-exclamation-octagon"></i>
         <span>Réclamation</span>
+      </a>
+
+      <a href="http://localhost:4200/#/parametre-utilisateur"  class="menu-item">
+        <i class="bi bi-gear"></i>
+        <span>Parametres</span>
       </a>
       
       <a href="http://localhost:4200/#/" class="menu-item logout">
@@ -352,38 +360,42 @@
     <i class="bi bi-arrow-bar-right"></i>
   </button>
   
-  <!-- Contenu de la page de réclamation -->
+
   <div class="container reclamation-container">
     <h2 class="reclamation-title">
       <div class="icon-container">
         <i class="bi bi-exclamation-triangle"></i>
         <span>Soumettre une Réclamation</span>
       </div>
+      <div class="lien"><a href="http://localhost:4200/#/liste-reclamations" >
+        <h6>Historique des Reclamations</h6>
+      </a></div>
     </h2>
+    
     
     <form id="reclamationForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="typeReclamation">Type de Réclamation</label>
         <div class="custom-control custom-radio">
-          <input type="radio" id="typeCarte" name="typeReclamation" class="custom-control-input" value="carte" [(ngModel)]="Reclamation.type">
+          <input type="radio" id="typeCarte" name="typeReclamation" class="custom-control-input" value="Carte Bancaire" [(ngModel)]="Reclamation.type">
           <label class="custom-control-label" for="typeCarte">
             <i class="bi bi-credit-card-2-back"></i> Demande Carte Bancaire
           </label>
         </div>
         <div class="custom-control custom-radio">
-          <input type="radio" id="typeCredit" name="typeReclamation" class="custom-control-input" value="credit" [(ngModel)]="Reclamation.type">
+          <input type="radio" id="typeCredit" name="typeReclamation" class="custom-control-input" value="Crédit Bancaire" [(ngModel)]="Reclamation.type">
           <label class="custom-control-label" for="typeCredit">
             <i class="bi bi-file-earmark-text"></i> Crédit Bancaire
           </label>
         </div>
         <div class="custom-control custom-radio">
-          <input type="radio" id="typeFile" name="typeReclamation" class="custom-control-input" value="file d attente" [(ngModel)]="Reclamation.type">
+          <input type="radio" id="typeFile" name="typeReclamation" class="custom-control-input" value="File D'attente" [(ngModel)]="Reclamation.type">
           <label class="custom-control-label" for="typeFile">
             <i class="bi bi-sort-numeric-up"></i> File D'attente
           </label>
         </div>
         <div class="custom-control custom-radio">
-          <input type="radio" id="typeAutre" name="typeReclamation" class="custom-control-input" value="autre" [(ngModel)]="Reclamation.type">
+          <input type="radio" id="typeAutre" name="typeReclamation" class="custom-control-input" value="Autre" [(ngModel)]="Reclamation.type">
           <label class="custom-control-label" for="typeAutre">
             <i class="bi bi-question-circle"></i> Autre
           </label>
@@ -411,5 +423,7 @@
       </div>
     </form>
   </div>
+
+
 </body>
 </html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crédit Sakan - ATB</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<div class="btnfixe">
+    <a href="assets/Demande-de-credit.pdf" target="_blank" class="btn-demande" style="background-color: #0800ea;">Telecharger la demande <i class="bi bi-download" style="margin-left: 50px;font-size: 1.5rem;"></i></a>
+</div>
+<body>
+    <div class="sidebar" id="mySidebar">
+        <div class="sidebar-header">
+          <a href="http://localhost:4200/#/espace-utilisateur" >
+          <img src="assets/logo atb.png"alt="Logo" class="sidebar-logo">
+        </a>
+          <h3 class="sidebar-title">
+            <b>
+              <span class="admin-text">User</span><br>
+              <span class="space-text">Space</span>
+            </b>
+          </h3>
+        </div>
+<nav class="sidebar-menu">
+        <a href="http://localhost:4200/#/file-utilisateur" class="menu-item">
+            <i class="bi bi-sort-numeric-up"></i>
+          <span>File D'attente</span>
+        </a>
+        <a href="http://localhost:4200/#/credit-utilisateur" class="menu-item active">
+            <i class="bi bi-file-earmark-text"></i>
+          <span>Crédit Bancaire</span>
+        </a>
+        <a href="http://localhost:4200/#/Carte-utilisateur"  class="menu-item">
+            <i class="bi bi-credit-card-2-back"></i>
+          <span>Demande Carte Bancaire</span>
+        </a>
+        <a href="http://localhost:4200/#/currency-utilisateur"  class="menu-item">
+          <i class="bi bi-currency-exchange"></i>
+        <span>Cours de Change</span>
+      </a>
+        
+        <a href="http://localhost:4200/#/reclamation-utilisateur"  class="menu-item">
+            <i class="bi bi-exclamation-octagon"></i>
+          <span>Réclamation</span>
+        </a>
+
+                     <a href="http://localhost:4200/#/parametre-utilisateur"  class="menu-item">
+                <i class="bi bi-gear"></i>
+              <span>Parametres</span>
+            </a>
+
+        <a href="http://localhost:4200/#/" class="menu-item logout">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Déconnexion</span>
+        </a>
+      </nav>
+      </div>
+      <button id="mobileSidebarToggle"  class="mobile-toggle-btn" (click)="toggleSidebar()">
+        <i class="bi bi-arrow-bar-right"></i>
+      </button>
+
+
+<div class="tousmbl">
+  <div class="banniere-principale fade-in">
+    <h1>Credit Sayara ATB</h1>
+    <p>La solution idéale pour devenir propriétaire sans contraintes financières</p>
+  </div>
+
+  <div class="introduction fade-in">
+    <p>Vous rêvez d’acheter une voiture neuve ou d'occasion, mais votre budget est limité ? Vous cherchez une solution de financement souple et adaptée à vos besoins personnels ou professionnels ?</p>
+    <p>N'y pensez plus,Notre crédit Sayara est la solution idéale.</p>
+  </div>
+
+  <div class="section fade-in" style="background-image: url('/assets/plsayara.png');background-size: cover; background-position: center;background-repeat: no-repeat;">
+    <h2>Quel type de voiture ?</h2>
+    <p><strong>Sayara</strong> est pour :</p>
+    <ul>
+        <li>Voiture neuve</li>
+        <li>Voiture de luxe</li>
+        <li>Voiture d’occasion</li>
+        <li>Voiture utilitaire</li>
+    </ul>
+  </div>
+</div>
+  <div class="section fade-in">
+    <h2>Pour qui ?</h2>
+    <ul>
+        <li>Pour toute personne (particulier ou professionnel) souhaitant acheter une voiture neuve ou d’occasion, utilitaire ou de luxe.</li>
+        <li>Également pour ceux qui souhaitent un véhicule pour un usage personnel ou professionnel.</li>
+
+    </ul>
+  </div>
+
+  <div class="section logement-vie fade-in">
+    <h2>Avantage</h2>
+    <p>
+        Crédit Sayara couvrant <strong>80% du prix de la voiture</strong>. <br>
+        La durée de remboursement peut aller <strong>jusqu'à 7 ans.</strong>.
+    </p>
+  </div>
+
+ 
+
+  
+
+  <div class="avantages">
+    <div class="avantage-item">
+      <div class="avantage-icon"><i class="bi bi-fuel-pump"></i></div>
+      <div class="avantage-title">Financement jusqu'à 80%</div>
+      <p>Un financement adapté à votre voiture</p>
+    </div>
+    <div class="avantage-item">
+      <div class="avantage-icon"><i class="bi bi-calendar-check"></i></div>
+      <div class="avantage-title">Durée jusqu'à 7 ans</div>
+      <p>Une longue période de remboursement pour alléger vos mensualités</p>
+    </div>
+    <div class="avantage-item">
+      <div class="avantage-icon"><i class="bi bi-shield"></i></div>
+      <div class="avantage-title">Assurance</div>
+      <p>Offre d'assurance vie liée au crédit</p>
+    </div>
+  </div>
+
+  <div class="note-importante">
+    <p><strong>Note :</strong> Les conditions du crédit peuvent varier selon votre profil. Consultez votre conseiller ATB pour une offre personnalisée.</p>
+  </div>
+
+  <div class="text-center">
+    <a href="http://localhost:4200/#/rdv-utilisateur" class="btn-demande">
+      Prendre un rendez-vous
+    </a>
+  </div>
+  
+  <div class="text-center">
+    <a href="assets/Demande-de-credit.pdf " target="_blank"class="btn-download">
+      <i class="bi bi-download" style="font-size: 1.5rem;"></i> Demande de crédit
+    </a>
+  </div>
+  <div class="footer">
+    <img src="assets/logo atb.png" alt="Logo ATB" class="logo-atb">
+    <p>© 2025 ATB - Arab Tunisian Bank | Tous droits réservés</p>
+  </div>
+</body>
+</html>

@@ -25,6 +25,27 @@ export class CurrencyService {
     const headers = this.getHeaders();
     return this.http.get<Currency[]>(this.apiUrl, { headers });
   }
+  getCurrencyByCode(code: string): Observable<Currency> {
+    const headers = this.getHeaders();
+    return this.http.get<Currency>(`${this.apiUrl}/${code}`, { headers });
+  }
 
+ 
+  addCurrency(currency: Currency): Observable<Currency> {
+    const headers = this.getHeaders();
+    return this.http.post<Currency>(this.apiUrl, currency, {headers});
+  }
+
+
+  updateCurrency(id: number, currency: Currency): Observable<Currency> {
+    const headers = this.getHeaders();
+    return this.http.put<Currency>(`${this.apiUrl}/${id}`, currency, {headers});
+  }
+
+
+  deleteCurrency(id: number): Observable<void> {
+    const headers = this.getHeaders();
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, {headers});
+  }
 
 }

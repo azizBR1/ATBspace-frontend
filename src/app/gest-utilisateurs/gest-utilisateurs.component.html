@@ -220,15 +220,17 @@
   transition: left 0.3s ease;
 }
 
-
+.menu-item.active {
+    background-color: rgba(85, 85, 85, 0.7);
+  }
 
   </style>
 </head>
 <body>
-  <!-- Sidebar -->
+
   <div class="sidebar" id="mySidebar">
     <div class="sidebar-header">
-      <a href="http://localhost:4200/#/admin-dashboard" >
+      <a href="http://localhost:4200/#/admin-dashboard" (click)="saveReferrer()" >
         <img src="assets/logo atb.png"alt="Logo" class="sidebar-logo">
       </a>
       <h3 class="sidebar-title">
@@ -239,31 +241,35 @@
       </h3>
     </div>
     <nav class="sidebar-menu">
-      <a href="http://localhost:4200/#/admin-dashboard" class="menu-item">
+      <a href="http://localhost:4200/#/admin-dashboard" (click)="saveReferrer()" class="menu-item">
         <i class="bi bi-speedometer2"></i>
         <span>Dashboard</span>
       </a>
-      <a href="http://localhost:4200/#/gest-utilisateurs" class="menu-item">
+      <a href="http://localhost:4200/#/gest-utilisateurs" (click)="saveReferrer()" class="menu-item"  class="menu-item active">
         <i class="bi bi-people"></i>
         <span>Gérer les comptes</span>
       </a>
-      <a href="parametres.html"  class="menu-item">
+      <a href="http://localhost:4200/#/credit-admin"  (click)="saveReferrer()" class="menu-item">
         <i class="bi bi-calendar-event"></i>
           <span>Gérer les rendez-vous</span>
       </a>
-      <a href="dashboard.html" class="menu-item">
+      <a href="http://localhost:4200/#/file-admin" (click)="saveReferrer()" class="menu-item">
         <i class="bi bi-sort-numeric-up"></i>
       <span>File D'attente</span>
     </a>
-    <a href="parametres.html"  class="menu-item">
+    <a href="http://localhost:4200/#/Carte-admin" (click)="saveReferrer()"  class="menu-item">
         <i class="bi bi-credit-card-2-back"></i>
       <span>Demande Carte Bancaire</span>
     </a>
-      <a href="parametres.html"  class="menu-item">
+    <a href="http://localhost:4200/#/currency-administrateur" (click)="saveReferrer()"  class="menu-item">
+      <i class="bi bi-currency-exchange"></i>
+      <span>Cours de Change</span>
+    </a>
+      <a href="http://localhost:4200/#/reclamation-admin" (click)="saveReferrer()"  class="menu-item">
         <i class="bi bi-exclamation-octagon"></i>
-        <span>Gérer les Réclamation</span>
+        <span>Gérer les Réclamations</span>
       </a>
-      <a href="http://localhost:4200/#/" class="menu-item logout">
+      <a href="http://localhost:4200/#/"  class="menu-item logout">
         <i class="bi bi-box-arrow-right"></i>
         <span>Déconnexion</span>
       </a>
@@ -330,7 +336,7 @@
                         ngModel 
                         id="searchName" 
                         class="form-control bg-transparent text-light border-left-0" 
-                        style="border-color: #6c757d;" 
+                        style="border-color: #6c757d; " 
                         placeholder="Rechercher des utilisateurs..." 
                         required
                     >
@@ -348,13 +354,13 @@
                         <a href=""><img src="/assets/icon-user.png" alt="" class="img-fluid rounded-circle w-60"></a>
                     </div>
                     <div class="col-6 card-title align-self-center mb-0">
-                        <h5>{{utilisateur?.username}}</h5>
+                        <h5 style="color: #fff;">{{utilisateur?.username}}</h5>
                         <p class="m-0">{{utilisateur?.role}}</p>
                     </div>
                 </div>
                 <ul class="list-group list-group-flush" >
-                    <li class="list-group-item" style="background-color: #2d2d2d;"><i class="fa fa-envelope float-right"></i>Email : <a href="https://workspace.google.com/intl/fr_ca/gmail/" target="_blank" rel="noopener noreferrer" style="color:#fff;">{{utilisateur?.email}}</a></li>
-                    <li class="list-group-item" style="background-color: #2d2d2d;"><i class="bi bi-person-gear float-right"></i>Statut : {{utilisateur?.status}}</li>
+                    <li class="list-group-item" style="background-color: #2d2d2d; color: #fff;"><i class="fa fa-envelope float-right"></i>Email : <a href="https://workspace.google.com/intl/fr_ca/gmail/" target="_blank" rel="noopener noreferrer" style="color:#fff;">{{utilisateur?.email}}</a></li>
+                    <li class="list-group-item" style="background-color: #2d2d2d; color: #fff;"><i class="bi bi-person-gear float-right"></i>Statut : {{utilisateur?.status}}</li>
                 </ul>
                 <div class="card-body">
                     <div class="float-right btn-group btn-group-sm">
@@ -376,7 +382,6 @@
     </div>
 </div>
 
-<!-- Add Utilisateur Modal -->
 <div class="modal fade" id="addUtilisateurModal" tabindex="-1" role="dialog" aria-labelledby="addUtilisateurModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content" style="background-color: #2d2d2d; color: #e0e0e0; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
@@ -395,8 +400,9 @@
                   <div class="form-row">
                       <div class="form-group col-md-6">
                           <label for="nom" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Nom</label>
-                          <input type="text" ngModel name="nom" class="form-control" id="nom" placeholder="Entrez le nom" 
+                          <input type="text" ngModel name="nom" class="form-control" id="nom" placeholder="Entrez le nom"
                                  style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px;">
+                                 
                       </div>
                       <div class="form-group col-md-6">
                           <label for="prenom" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Prénom</label>
@@ -413,9 +419,11 @@
                                 <i class="bi bi-person"></i>
                               </span>
                           </div>
-                          <input type="text" ngModel name="username" class="form-control" id="username" placeholder="Entrez le nom d'utilisateur" 
-                                 style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;">
+                          <input type="text" ngModel name="username" class="form-control" id="username" placeholder="Entrez le nom d'utilisateur"  #cle="ngModel" (ngModelChange)="usernameconfirm(cle.value)"
+                                 style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;" required>
+                                 
                       </div>
+                      <p *ngIf="usernameexist" style="color: red;">Ce nom d'utilisateur existe déjà.</p>
                   </div>
                   
                   <div class="form-group">
@@ -427,7 +435,7 @@
                               </span>
                           </div>
                           <input type="password" ngModel name="mdp" class="form-control" id="mdp" placeholder="Entrez le mot de passe" 
-                                 style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;">
+                                 style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;" required>
                       </div>
                   </div>
                   
@@ -440,7 +448,9 @@
                               </span>
                           </div>
                           <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Entrez l'adresse email" 
-                                 style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;">
+                                 style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;"
+                                 #emailInputadd="ngModel"
+                                (ngModelChange)="validEmail($event)">
                       </div>
                   </div>
                   
@@ -484,7 +494,7 @@
                               style="background-color: #4d4d4d; color: #ffffff; border-radius: 5px; padding: 8px 15px; transition: all 0.3s;">
                               <i class="bi bi-x-circle"></i>&nbsp;Annuler
                       </button>
-                      <button [disabled]="addForm.invalid" type="submit" class="btn" 
+                      <button [disabled]="addForm.invalid || usernameexist || !emailInputadd.value.trim() || emailInvalid || emailExists" type="submit" class="btn" 
                               style="background-color: #007bff; color: #ffffff; border-radius: 5px; padding: 8px 15px; transition: all 0.3s;">
                               <i class="bi bi-plus-circle"></i>&nbsp;Enregistrer
 
@@ -501,7 +511,7 @@
     <div class="modal-dialog" role="document"  >
         <div class="modal-content" style="background-color: #2d2d2d; color: #e0e0e0; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);" >
             <div class="modal-header">
-                <h5 class="modal-title" id="updateUtilisateurModalLabel">Edit Utilisateur {{editUtilisateur.nom}}</h5>
+                <h5 class="modal-title" id="updateUtilisateurModalLabel">Edit Utilisateur</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -516,9 +526,13 @@
                               <i class="bi bi-person"></i>
                             </span>
                         </div>
-                        <input type="text" ngModel="{{editUtilisateur.username}}" name="username" class="form-control" id="username" placeholder="username" 
-                              style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;">
+                        <input type="text" ngModel="{{editUtilisateur.username}}" ngModel name="username" name="username" class="form-control" id="username" placeholder="username" 
+                              style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;"
+                              [ngModel]="editUtilisateur.username"
+                              (ngModelChange)="usernameconfirm($event)" #usernameInput>
+                              <input type="hidden" ngModel="{{editUtilisateur.id}}" name="id">
                     </div>
+                        <p *ngIf="usernameexist" style="color: red;">Ce nom d'utilisateur existe déjà.</p>
                 </div>
                 
                 <div class="form-group">
@@ -530,16 +544,20 @@
                              
                             </span>
                         </div>
-                        <input type="email" ngModel="{{editUtilisateur.email}}" name="email" class="form-control" id="email" placeholder="Email" 
-                              style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;">
+                        <input type="email" ngModel="{{editUtilisateur.email}}" name="email" class="form-control" id="email" placeholder="Email"  
+                              style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 0 5px 5px 0; padding: 10px;"  
+                              #emailInput="ngModel"
+                              (ngModelChange)="validEmail($event)" required>
                     </div>
+                    
+
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="role" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Role</label>
                         <select ngModel="{{editUtilisateur.role}}" name="role" class="form-control" id="role" 
-                               style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px; height: 45px;">
+                               style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px; height: 45px;" required>
                             <option value="CLIENT">CLIENT</option>
                             <option value="EMPLOYEE">EMPLOYEE</option>
                         </select>
@@ -547,7 +565,7 @@
                     <div class="form-group col-md-6">
                         <label for="status" style="font-size: 14px; margin-bottom: 5px; color: #cccccc;">Status</label>
                         <select ngModel="{{editUtilisateur.status}}" name="status" class="form-control" id="status" 
-                               style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px; height: 45px;">
+                               style="background-color: #3d3d3d; border: 1px solid #4d4d4d; color: #ffffff; border-radius: 5px; padding: 10px; height: 45px;" required>
                             <option value="ACTIF">ACTIF</option>
                             <option value="SUSPENDUE">SUSPENDUE</option>
                             <option value="EN ATTENTE">EN ATTENTE</option>
@@ -561,7 +579,7 @@
                            <i class="bi bi-x-circle"></i>&nbsp;Annuler
                           
                     </button>
-                    <button (click)="onUpdateUtilisateur(editForm.value)" data-dismiss="modal" class="btn" 
+                    <button (click)="onUpdateUtilisateur(editForm.value)" [disabled]="!usernameInput.value.trim() || !emailInput.value.trim() || emailInvalid || usernameexist" data-dismiss="modal" class="btn" 
                            style="background-color: #007bff; color: #ffffff; border-radius: 5px; padding: 8px 15px; transition: all 0.3s;">
                            <i class="bi bi-plus-circle"></i>&nbsp;Enregistrer
                     </button>
@@ -577,16 +595,16 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="background-color: #2d2d2d; color: #e0e0e0; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModelLabel">Delete Utilisateur</h5>
+                <h5 class="modal-title" id="deleteModelLabel">Supprimer Utilisateur</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete utilisateur {{deleteUtilisateur.nom}}?</p>
+                <p>Êtes-vous sûr de vouloir supprimer {{deleteUtilisateur.nom}}?</p>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button (click)="onDeleteUtilisateur(deleteUtilisateur.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                    <button (click)="onDeleteUtilisateur(deleteUtilisateur.id)" class="btn btn-danger" data-dismiss="modal">Oui</button>
                 </div>
             </div>
         </div>

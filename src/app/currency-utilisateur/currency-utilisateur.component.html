@@ -1,23 +1,149 @@
-<div class="currency-list">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Code</th>
-          <th>Unité</th>
-          <th>Taux Achat</th>
-          <th>Taux Vente</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let currency of currencies">
-          <td>{{ currency.code }}</td>
-          <td>{{ currency.unite }}</td>
-          <td>{{ currency.txa }}</td>
-          <td>{{ currency.txv }}</td>
-          <td>{{ currency.date | date: 'dd/MM/yyyy HH:mm' }}</td>
-        </tr>
-      </tbody>
-    </table>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+</head>
+<body>
+
+  <div class="sidebar" id="mySidebar">
+    <div class="sidebar-header">
+      <a href="http://localhost:4200/#/espace-utilisateur" >
+        <img src="assets/logo atb.png"alt="Logo" class="sidebar-logo">
+      </a>
+      <h3 class="sidebar-title">
+        <b>
+          <span class="admin-text">User</span><br>
+          <span class="space-text">Space</span>
+        </b>
+      </h3>
+    </div>
+    <nav class="sidebar-menu">
+      <a href="http://localhost:4200/#/file-utilisateur" class="menu-item">
+        <i class="bi bi-sort-numeric-up"></i>
+        <span>File D'attente</span>
+      </a>
+      <a href="http://localhost:4200/#/credit-utilisateur" class="menu-item">
+        <i class="bi bi-file-earmark-text"></i>
+        <span>Crédit Bancaire</span>
+      </a>
+      <a href="http://localhost:4200/#/Carte-utilisateur"  class="menu-item">
+        <i class="bi bi-credit-card-2-back"></i>
+        <span>Demande Carte Bancaire</span>
+      </a>
+      <a href="http://localhost:4200/#/currency-utilisateur"  class="menu-item active">
+        <i class="bi bi-currency-exchange"></i>
+      <span>Cours de Change</span>
+    </a>
+      <a href="http://localhost:4200/#/reclamation-utilisateur"class="menu-item" >
+        <i class="bi bi-exclamation-octagon"></i>
+        <span>Réclamation</span>
+      </a>
+              <a href="http://localhost:4200/#/parametre-utilisateur"  class="menu-item">
+                <i class="bi bi-gear"></i>
+              <span>Parametres</span>
+            </a>
+      
+      <a href="http://localhost:4200/#/" class="menu-item logout">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Déconnexion</span>
+      </a>
+    </nav>
   </div>
+  <button id="mobileSidebarToggle"  class="mobile-toggle-btn" (click)="toggleSidebar()">
+    <i class="bi bi-arrow-bar-right"></i>
+  </button>
+
   
+
+  <div class="currency-container">
+<div class="currency-board">
+  <h2 class="digital-title">Taux de change</h2>
+  <table class="digital-currency-table">
+    <thead>
+      <tr>
+        <th><i class="bi bi-globe-europe-africa"></i></th>
+        <th>Code</th>
+        <th>Unité</th>
+        <th>Taux d'achat</th>
+        <th>Taux de vente</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let currency of currencies">
+        <td class="digital-display-flag">
+          <img [src]="getFlagUrl(currency.code)" alt="{{ currency.code }} flag" width="30">
+        </td>
+    
+        <td class="digital-display-code">{{ currency.code }}</td>
+        <td class="digital-display-unit">{{ currency.unite }}</td>
+        <td class="digital-display-rate">{{ currency.txa }}</td>
+        <td class="digital-display-rate">{{ currency.txv }}</td>
+        <td class="digital-display-date">{{ currency.date | date: 'dd/MM/yyyy HH:mm' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="currency-converter">
+  <div class="currency-action">
+    <span 
+      class="currency-action-text-left" 
+      [ngClass]="{'active': isLeftActive}"
+    >
+      Acheter des devises
+    </span>
+    
+    <button 
+      class="currency-action-btn" 
+      (click)="toggleAction()"
+    >
+      <i class="bi bi-arrow-left-right"></i>
+    </button>
+    
+    <span 
+      class="currency-action-text-right" 
+      [ngClass]="{'active': !isLeftActive}"
+    >
+      Vendre des devises
+    </span>
+  </div>
+
+  <input 
+    type="number" 
+    class="currency-input" 
+    placeholder="Montant en TND" 
+    [(ngModel)]="inputAmount"
+    (ngModelChange)="convertCurrency()"
+  >
+  
+  <span>Vers</span>
+  
+  <select 
+    class="currency-select" 
+    [(ngModel)]="currencyTo"
+    (ngModelChange)="convertCurrency()"
+  >
+    <option *ngFor="let currency of currencies" [value]="currency.code">
+      {{ currency.code }}
+    </option>
+  </select>
+  
+  <input 
+    type="number" 
+    class="currency-input" 
+    placeholder="Montant converti" 
+    [ngModel]="outputAmount"
+    disabled
+  >
+</div>
+
+

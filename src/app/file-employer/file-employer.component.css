@@ -1,0 +1,378 @@
+     
+          body.sidebar-expanded {
+            padding-left: 260px;
+          }
+          
+     
+          .sidebar {
+            background: linear-gradient(to bottom, #000000, #00078f);
+            width: 70px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transition: width 0.3s ease;
+            overflow: hidden;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+          }
+          
+          .sidebar:hover {
+            width: 260px;
+          }
+          
+          .sidebar-header {
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+          }
+          
+          .sidebar-logo {
+            width: 55px;
+            height: 55px;
+            margin-right: 15px;
+          }
+          
+          .sidebar-title {
+            white-space: nowrap;
+            line-height: 0.8;
+          }
+          
+          .admin-text {
+            font-size: 28px;
+            color: rgb(189, 189, 189);
+          }
+          
+          .space-text {
+            font-size: 20px;
+            color: white;
+          }
+          
+          .sidebar-menu {
+            list-style: none;
+            padding: 0;
+          }
+          
+          .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+          }
+          
+          .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+          }
+          
+          .menu-item i {
+            font-size: 20px;
+            min-width: 30px;
+            margin-left: 5px;
+      
+          }
+          
+          .menu-item span {
+            margin-left: 15px;
+            white-space: nowrap;
+          }
+          
+          .logout {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+          }
+          
+          /* Existing page styles */
+          .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 990;
+          }
+          
+          .container {
+            margin-top: 20px;
+          }
+          
+          .card {
+            border: none;
+            -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+            margin-bottom: 30px;
+            background: white;
+          }
+          
+          .w-60 {
+            width: 60px;
+          }
+          
+          h1, h2, h3, h4, h5, h6 {
+            margin: 0 0 10px;
+            font-weight: 600;
+          }
+          
+          .social-links li a {
+            -webkit-border-radius: 50%;
+            background-color: rgba(89,206,181,.85);
+            border-radius: 50%;
+            color: #fff;
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            width: 30px;
+            font-size: 12px;
+          }
+          
+          a {
+            color: #707070;
+          }
+          
+          .btn-toggle-sidebar {
+            position: fixed;
+            top: 10px;
+            left: 80px;
+            z-index: 1001;
+            background-color: #860624;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: left 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+          }
+          
+          .btn-toggle-sidebar.expanded {
+            left: 270px;
+          }
+      
+      
+          @media (max-width: 768px) {
+            .mobile-toggle-btn {
+              display: none;
+          }
+          
+          .sidebar {
+            width: 0; /* Hide sidebar on mobile by default */
+          }
+          
+          .sidebar.expanded {
+            width: 260px; /* Full width when expanded */
+          }
+          
+          body {
+            padding-left: 0; /* Remove padding when sidebar is hidden */
+          }
+          
+          body.sidebar-expanded {
+            padding-left: 260px; /* Add padding when sidebar is expanded */
+          }
+        }
+      
+        /* Remplacez cette partie dans votre CSS */
+      .mobile-toggle-btn {
+        position: fixed;
+        top: 400px;
+        left: 10px;
+        background-color: #860624;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        font-size: 22px;
+        transition: left 0.3s ease;
+      }
+
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+    padding-left: 90px;
+    padding-bottom: 50%;
+  }
+  
+  h2 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 15px;
+  }
+  
+  h2:after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 3px;
+    background-color: #750010;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Tableau de file d'attente */
+  .digital-currency-table {
+    width: 100%;
+    background-color: #252525;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+  }
+  
+  .digital-currency-table thead {
+    background-color: #750010;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .digital-currency-table th {
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+    border: none;
+  }
+  
+  .digital-currency-table tbody tr {
+    border-bottom: 1px solid #333333;
+    transition: background-color 0.3s ease;
+  }
+  
+  .digital-currency-table tbody tr:hover {
+    background-color: #2a2a2a;
+  }
+  
+  .digital-currency-table td {
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+  }
+  
+  /* Style pour les codes d'affichage digital */
+  .digital-display-code {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #ffffff;
+  }
+  
+  /* Style pour le code spécifique */
+  td.digital-display-code:nth-child(4) {
+    color: #ff9900;
+    font-size: 1.1em;
+  }
+  
+  /* Information sur la durée totale */
+  .mt-3 {
+    background-color: #252525;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #750010;
+  }
+  
+  .mt-3 strong {
+    color: #ffffff;
+    margin-right: 10px;
+  }
+  
+  .mt-3 span {
+    color: #cccccc;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+  }
+  
+  
+  button.close {
+    background-color: #750010;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    opacity: 1;
+    float: none;
+    display: flex;
+    margin-left: 1238px;
+  }
+  
+  button.close:hover {
+    background-color: #d30015;
+    color: #121212;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(255, 52, 41, 0.3);
+  }
+  
+
+  @keyframes nouveauNumero {
+    from { background-color: rgba(117, 0, 16, 0.5); }
+    to { background-color: transparent; }
+  }
+  
+  .nouvelle-entree {
+    animation: nouveauNumero 2s ease-out;
+  }
+  
+
+  .statut-attente {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .en-attente {
+    background-color: #ffcc00;
+  }
+  
+  .en-service {
+    background-color: #00cc66;
+  }
+  
+  .termine {
+    background-color: #999999;
+  }
+  
+  /* Affichage responsive */
+  @media (max-width: 768px) {
+    .digital-currency-table {
+      font-size: 0.9em;
+    }
+    
+    .digital-currency-table th,
+    .digital-currency-table td {
+      padding: 8px 5px;
+    }
+    
+    h2 {
+      font-size: 1.5em;
+    }
+  } 
+
+.menu-item.active {
+background-color: rgba(85, 85, 85, 0.7);
+}

@@ -7,5 +7,5 @@ export interface Reclamation {
   date: Date;
   statut: string;
   type: string;
-  pieceJointe: Uint8Array | null;
+  pieceJointe: string | null;
   }
